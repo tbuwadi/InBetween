@@ -29,6 +29,7 @@
         else if (raw.includes('movement')) key = 'movement';
         else if (raw.includes('learn')) key = 'learn';
         else if (raw.includes('explore')) key = 'explore';
+          else if (raw.includes('fun meeting')) key = 'funmeetingspaces';
         // Show only cards for the selected category
         allCards.forEach(function(card) {
           if (card.dataset.category === key) {
@@ -63,6 +64,7 @@
           <li>🏃 Movement</li>
           <li>🧠 Learn Something</li>
           <li>🗺️ Explore Campus</li>
+          <li>🌳 Fun Meeting Spaces</li>
         </ul>
     </aside>
     <main class="main-content">
@@ -70,6 +72,15 @@
   <!-- Filters removed as requested -->
   <p style="font-weight: 400; font-size: 1rem; color: #666;">Select a category to explore Redmond Campus</p>
     <div id="card-container" class="card-container" style="display:none;">
+      <!-- Fun Meeting Spaces -->
+      <a href="funmeetingspaces/treehouse.html" class="category-card" data-category="funmeetingspaces">
+        <img src="images/treehouseb31.png" alt="Treehouse Meeting Room" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Treehouse</h3>
+          <p class="card-desc">Hold your next meeting in a unique treehouse space in Building 31. Enjoy creative vibes and a view from above!</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 31</span>
+        </div>
+      </a>
       <!-- Music -->
       <a href="music/karaoke.html" class="category-card" data-category="music">
   <img src="images/karaokeb4.png" alt="Karaoke Lounge" class="card-img" />
@@ -88,6 +99,14 @@
           </div>
         </a>
       <!-- Coffee & Snacks -->
+        <a href="coffee/snack.html" class="category-card" data-category="coffee">
+          <img src="images/snackb4.png" alt="Snack Market" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Snack Market</h3>
+            <p class="card-desc">Grab a quick snack from the vending machines or market in Building 4. Perfect for a midday energy boost!</p>
+            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 4, Floor 1</span>
+          </div>
+        </a>
         <a href="coffee/breville.html" class="category-card" data-category="coffee">
           <img src="images/brevilleb4.png" alt="Breville Coffee Machine" class="card-img" />
           <div class="card-content">
@@ -125,11 +144,20 @@
         </div>
       </a>
       <!-- Explore Campus -->
-      <a href="explore/speakeasy.html" class="category-card" data-category="explore">
+  <a href="funmeetingspaces/speakeasy.html" class="category-card" data-category="funmeetingspaces">
   <img src="images/speakeasyb40.png" alt="Speakeasy / Secret Room" class="card-img" />
         <div class="card-content">
           <h3 class="card-title">Speakeasy / Secret Room</h3>
           <p class="card-desc">Discover the hidden speakeasy on campus—a secret room for quiet meetings, creative sessions, or just a fun surprise.</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 40, Floor 3</span>
+        </div>
+      </a>
+      <!-- Explore Campus: Acoustic Panel Wall -->
+      <a href="explore/acousticpanel.html" class="category-card" data-category="explore">
+  <img src="images/acousticpanelwallb40.png" alt="Acoustic Panel Wall" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Acoustic Panel Wall</h3>
+          <p class="card-desc">Experience the innovative acoustic panel wall in Building 40.</p>
           <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 40, Floor 3</span>
         </div>
       </a>
