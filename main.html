@@ -1,0 +1,140 @@
+    </main>
+</div>
+<script>
+  // Show cards when any category is clicked
+  document.addEventListener('DOMContentLoaded', function() {
+    const cardContainer = document.getElementById('card-container');
+    const allCards = document.querySelectorAll('.category-card');
+    // Show all cards by default
+    cardContainer.style.display = 'flex';
+    allCards.forEach(function(card) {
+      card.style.display = 'flex';
+    });
+
+    document.querySelectorAll('.category-list li').forEach(function(item) {
+      item.addEventListener('click', function() {
+        // Map category text to data-category value
+        const raw = item.textContent.trim().toLowerCase();
+        let key = '';
+        if (raw.includes('all')) {
+          allCards.forEach(function(card) {
+            card.style.display = 'flex';
+          });
+          return;
+        }
+        if (raw.includes('music')) key = 'music';
+        else if (raw.includes('coffee')) key = 'coffee';
+        else if (raw.includes('wellness')) key = 'wellness';
+        else if (raw.includes('games')) key = 'games';
+        else if (raw.includes('movement')) key = 'movement';
+        else if (raw.includes('learn')) key = 'learn';
+        else if (raw.includes('explore')) key = 'explore';
+        // Show only cards for the selected category
+        allCards.forEach(function(card) {
+          if (card.dataset.category === key) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Page - In Between</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <h2>Categories</h2>
+        <ul class="category-list">
+          <li>📋 All</li>
+          <li>🎶 Music</li>
+          <li>☕ Coffee & Snacks</li>
+          <li>🧘 Wellness</li>
+          <li>🎮 Games</li>
+          <li>🏃 Movement</li>
+          <li>🧠 Learn Something</li>
+          <li>🗺️ Explore Campus</li>
+        </ul>
+    </aside>
+    <main class="main-content">
+  <h1>Discover what’s possible in <span style="color:#38b2ac;font-weight:bold;">In&nbsp;Between</span> work</h1>
+  <!-- Filters removed as requested -->
+  <p style="font-weight: 400; font-size: 1rem; color: #666;">Select a category to explore Redmond Campus</p>
+    <div id="card-container" class="card-container" style="display:none;">
+      <!-- Music -->
+      <a href="music/karaoke.html" class="category-card" data-category="music">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" alt="Karaoke Lounge" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Karaoke Lounge</h3>
+          <p class="card-desc">Sing your heart out in our dedicated karaoke lounge, equipped with the latest sound system and a wide selection of songs.</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 5, Floor 4</span>
+        </div>
+      </a>
+        <a href="games/xbox.html" class="category-card" data-category="games">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80" alt="XBox Lounge" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">XBox Lounge</h3>
+            <p class="card-desc">Relax and play the latest games in our XBox Lounge, equipped with comfy seating and a big screen.</p>
+            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 4, Floor 4</span>
+          </div>
+        </a>
+      <!-- Coffee & Snacks -->
+        <a href="coffee/breville.html" class="category-card" data-category="coffee">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Breville Coffee Machine" class="card-img" />
+          <div class="card-content">
+            <h3 class="card-title">Breville Coffee Machine</h3>
+            <p class="card-desc">Enjoy premium coffee from our new Breville machine, available for all employees in the lounge.</p>
+            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 5, Floor 4</span>
+          </div>
+        </a>
+      <!-- Wellness -->
+          <a href="wellness/naproom.html" class="category-card" data-category="wellness">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Nap Room" class="card-img" />
+            <div class="card-content">
+              <h3 class="card-title">Nap Room</h3>
+              <p class="card-desc">Recharge in our quiet nap room, designed for short breaks and relaxation during your workday.</p>
+              <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 16, Floor 2</span>
+            </div>
+          </a>
+      </a>
+      <!-- Movement -->
+      <a href="movement/soccer.html" class="category-card" data-category="movement">
+        <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=400&q=80" alt="Soccer Field" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Soccer Field</h3>
+          <p class="card-desc">Join a pickup game or practice your skills at the campus soccer field, open to all employees.</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Commons</span>
+        </div>
+      </a>
+      <!-- Learn Something -->
+      <a href="learn/library.html" class="category-card" data-category="learn">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Library" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Library</h3>
+          <p class="card-desc">Visit the campus library to read, study, or borrow books and resources for personal and professional growth.</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 7, Floor 2</span>
+        </div>
+      </a>
+      <!-- Explore Campus -->
+      <a href="explore/speakeasy.html" class="category-card" data-category="explore">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=80" alt="Speakeasy / Secret Room" class="card-img" />
+        <div class="card-content">
+          <h3 class="card-title">Speakeasy / Secret Room</h3>
+          <p class="card-desc">Discover the hidden speakeasy on campus—a secret room for quiet meetings, creative sessions, or just a fun surprise.</p>
+          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 40, Floor 3</span>
+        </div>
+      </a>
+    </div>
+    </main>
+  </div>
+</body>
+</html>
