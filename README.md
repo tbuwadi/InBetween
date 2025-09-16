@@ -1,10 +1,11 @@
 
+
 # In Between
 
 
 A modern, clean webapp for discovering activities, spaces, and surprises around the Redmond Campus. This project (including this ReadMe) was entirely vibe coded.
 
-**Live Site:** [https://tbuwadi.github.io/InBetween/main.html](https://tbuwadi.github.io/InBetween/index.html)
+**Live Site:** [https://tbuwadi.github.io/InBetween.html](https://tbuwadi.github.io/InBetween/index.html)
 
 ## Features
 - Interactive landing and main pages
