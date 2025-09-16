@@ -1,6 +1,32 @@
     </main>
 </div>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function updateFilters() {
+      const allBuildingCheckbox = document.getElementById('building-all');
+      const checkedBuildings = Array.from(document.querySelectorAll('.building-checkbox:checked')).map(cb => cb.value);
+      const allCategoryCheckbox = document.getElementById('category-all');
+      const checkedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value);
+      document.querySelectorAll('.category-card').forEach(function(card) {
+        const span = card.querySelector('span');
+        const matchesBuilding = (allBuildingCheckbox.checked || checkedBuildings.length === 0)
+          ? true
+          : (span && (checkedBuildings.some(val => span.textContent.trim() === 'Building ' + val || span.textContent.trim().startsWith('Building ' + val + ', '))));
+        const matchesCategory = (allCategoryCheckbox.checked || checkedCategories.length === 0)
+          ? true
+          : (card.dataset.category && checkedCategories.includes(card.dataset.category));
+        if (matchesBuilding && matchesCategory) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    document.querySelectorAll('.building-checkbox, #building-all, .category-checkbox, #category-all').forEach(cb => {
+      cb.addEventListener('change', updateFilters);
+    });
+    // ...existing code...
+  });
   // Show cards when any category is clicked
   document.addEventListener('DOMContentLoaded', function() {
     const cardContainer = document.getElementById('card-container');
@@ -62,15 +88,113 @@
           <li>🧘 Wellness</li>
           <li>🎮 Games</li>
           <li>🏃 Movement</li>
-          <li>🧠 Learn Something</li>
+          <li>🧠 Learn</li>
           <li>🗺️ Explore Campus</li>
-          <li>🌳 Fun Meeting Spaces</li>
+          <li>🌳 Meeting Spaces</li>
         </ul>
     </aside>
     <main class="main-content">
   <h1>Discover what’s possible in <span style="color:#38b2ac;font-weight:bold;">In&nbsp;Between</span> work</h1>
   <!-- Filters removed as requested -->
-  <p style="font-weight: 400; font-size: 1rem; color: #666;">Select a category to explore Redmond Campus</p>
+  <div style="display:flex;align-items:center;gap:24px;margin-bottom:28px;">
+  <span style="font-weight:500;font-size:1.08rem;color:#444;margin-right:18px;">Filter By:</span>
+    <div style="position:relative;display:flex;align-items:center;gap:10px;">
+      <button id="building-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#38b2ac;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
+  <span style="font-size:1.18rem;">🏢</span> <span style="color:#111;font-weight:bold;">Building:</span> <span id="building-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
+      </button>
+      <div id="building-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" id="building-all" style="accent-color:#2563eb;margin:0 4px 0 0;">All</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="4" style="accent-color:#2563eb;margin:0 4px 0 0;">4</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="5" style="accent-color:#2563eb;margin:0 4px 0 0;">5</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="7" style="accent-color:#2563eb;margin:0 4px 0 0;">7</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="16" style="accent-color:#2563eb;margin:0 4px 0 0;">16</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="28" style="accent-color:#2563eb;margin:0 4px 0 0;">28</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="31" style="accent-color:#2563eb;margin:0 4px 0 0;">31</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="40" style="accent-color:#2563eb;margin:0 4px 0 0;">40</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="92" style="accent-color:#2563eb;margin:0 4px 0 0;">92</label>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <button id="category-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#2563eb;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
+  <span style="font-size:1.18rem;">📋</span> <span style="color:#111;font-weight:bold;">Category:</span> <span id="category-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
+      </button>
+      <div id="category-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" id="category-all" style="accent-color:#2563eb;margin:0 4px 0 0;">All</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="music" style="accent-color:#2563eb;margin:0 4px 0 0;">Music</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="coffee" style="accent-color:#2563eb;margin:0 4px 0 0;">Coffee & Snacks</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="wellness" style="accent-color:#2563eb;margin:0 4px 0 0;">Wellness</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="games" style="accent-color:#2563eb;margin:0 4px 0 0;">Games</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="movement" style="accent-color:#2563eb;margin:0 4px 0 0;">Movement</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="learn" style="accent-color:#2563eb;margin:0 4px 0 0;">Learn</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="explore" style="accent-color:#2563eb;margin:0 4px 0 0;">Explore Campus</label>
+  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="funmeetingspaces" style="accent-color:#2563eb;margin:0 4px 0 0;">Meeting Spaces</label>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Dropdown menu logic
+    function setupDropdownMenu(btnId, menuId) {
+      const btn = document.getElementById(btnId);
+      const menu = document.getElementById(menuId);
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      });
+      document.addEventListener('click', function(e) {
+        if (!menu.contains(e.target) && e.target !== btn) {
+          menu.style.display = 'none';
+        }
+      });
+    }
+    setupDropdownMenu('building-filter-btn', 'building-filter-menu');
+    setupDropdownMenu('category-filter-btn', 'category-filter-menu');
+
+    // Show current selections for building and category in the filter button itself
+    function updateSelectedLabels() {
+      // Building
+      const allBuilding = document.getElementById('building-all');
+      const buildingCheckboxes = document.querySelectorAll('.building-checkbox');
+      const checkedBuildings = Array.from(buildingCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+      const buildingLabel = document.getElementById('building-selected-label');
+      if (allBuilding.checked) {
+        buildingLabel.textContent = 'All';
+        buildingCheckboxes.forEach(cb => {
+          cb.disabled = true;
+        });
+        allBuilding.disabled = false;
+      } else {
+        buildingLabel.textContent = checkedBuildings.length === 0 ? 'All' : checkedBuildings.join(', ');
+        buildingCheckboxes.forEach(cb => {
+          cb.disabled = false;
+        });
+        allBuilding.disabled = false;
+      }
+      // Category
+      const allCategory = document.getElementById('category-all');
+      const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+      const checkedCategories = Array.from(categoryCheckboxes).filter(cb => cb.checked).map(cb => cb.nextSibling.textContent.trim());
+      const categoryLabel = document.getElementById('category-selected-label');
+      if (allCategory.checked) {
+        categoryLabel.textContent = 'All';
+        categoryCheckboxes.forEach(cb => {
+          cb.disabled = true;
+        });
+        allCategory.disabled = false;
+      } else {
+        categoryLabel.textContent = checkedCategories.length === 0 ? 'All' : checkedCategories.join(', ');
+        categoryCheckboxes.forEach(cb => {
+          cb.disabled = false;
+        });
+        allCategory.disabled = false;
+      }
+    }
+    // Update labels and disable/enable checkboxes on change
+    document.querySelectorAll('.building-checkbox, #building-all, .category-checkbox, #category-all').forEach(cb => {
+      cb.addEventListener('change', updateSelectedLabels);
+    });
+    // Initial label update
+    updateSelectedLabels();
+  </script>
     <div id="card-container" class="card-container" style="display:none;">
       <!-- Fun Meeting Spaces -->
       <a href="funmeetingspaces/treehouse.html" class="category-card" data-category="funmeetingspaces">
