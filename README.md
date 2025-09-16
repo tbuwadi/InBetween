@@ -45,15 +45,15 @@ Hackathon2025/
 
 ## Customization
 
-Copy and paste this vibe coding prompt to add content to In Between, replacing the blanks with the details for your card:
+*Copy and paste this vibe coding prompt to add content to In Between, replacing the blanks with the details for your card:*
 
-In the ____ category folder, add another card with these details:
+*In the ____ category folder, add another card with these details:*
 
-Title: ____
-Location tag: Building ____ , floor ____
-Image: Use a default image
+*Title: ____*
+*Location tag: Building ____ , floor ____*
+*Image: Use a default image*
 
-Link this to the main page as well and ensure that both the main page and the info page have the same image, location tag and description. Ensure the info page is formatted like the rest.
+*Link this to the main page as well and ensure that both the main page and the info page have the same image, location tag and description. Ensure the info page is formatted like the rest.*
 
 ## License
 MIT
