@@ -3,7 +3,13 @@
 # In Between
 
 
-A modern, clean webapp for discovering activities, spaces, and surprises around the Redmond Campus. This project (including this ReadMe) was entirely vibe coded.
+In Between is a sleek, modern web app designed to help you make the most of the little moments that fall in between the big ones. Whether you're waiting for your code to build, have a 20-minute gap before your next meeting, or just need a quick mental reset, In Between reveals delightful activities and hidden gems across the Redmond campus that fit perfectly into those fleeting windows of time.
+
+Mini golf? Karaoke? A walk to a whimsical meeting space? If you’ve got a few minutes, In Between helps you find something fun, refreshing, and nearby.
+
+The name In Between reflects the spirit of the app—it lives in the margins of your day, turning idle time into opportunity. It’s not about scheduling more, it’s about discovering more in between the things you already do.
+
+This project was entirely vibe-coded, with a focus on simplicity, spontaneity, and serendipity.
 
 **Live Site:** [https://tbuwadi.github.io/InBetween.html](https://tbuwadi.github.io/InBetween/index.html)
 
