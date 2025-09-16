@@ -1,7 +1,7 @@
 
 # In Between
 
-A modern, clean webapp for discovering activities, spaces, and surprises around the Redmond Campus. This project was entirely vibe coded.
+A modern, clean webapp for discovering activities, spaces, and surprises around the Redmond Campus. This project (including this ReadMe) was entirely vibe coded.
 
 ## Features
 - Interactive landing and main pages
@@ -45,7 +45,7 @@ Hackathon2025/
 
 ## Customization
 
-*Copy and paste this vibe coding prompt to add content to In Between, replacing the blanks with the details for your card:*
+Copy and paste this vibe coding prompt to add content to In Between, replacing the blanks with the details for your card:
 
 *In the ____ category folder, add another card with these details:*
 
