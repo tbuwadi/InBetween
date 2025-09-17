@@ -1,7 +1,6 @@
     </main>
 </div>
 <script>
-  // Building coordinates (example, replace with actual values)
   const buildingCoords = {
   // Updated/Additional Buildings
   '6': {lat: 47.6415, lng: -122.1287},
@@ -123,12 +122,19 @@
     const userSelect = document.getElementById('user-location');
     const userBuilding = userSelect.value;
     const userCoord = buildingCoords[userBuilding];
-    document.querySelectorAll('.category-card').forEach(function(card) {
+  const cardContainer = document.getElementById('card-container');
+  cardContainer.style.display = 'flex';
+  const cards = Array.from(document.querySelectorAll('.category-card'));
+    // Calculate distances and store them on each card
+    cards.forEach(function(card) {
       const destBuilding = getBuildingFromCard(card);
       const destCoord = buildingCoords[destBuilding];
       let distance = '';
       if (userCoord && destCoord) {
-        distance = haversineDistance(userCoord.lat, userCoord.lng, destCoord.lat, destCoord.lng).toFixed(2);
+        distance = haversineDistance(userCoord.lat, userCoord.lng, destCoord.lat, destCoord.lng);
+        card.dataset.distance = distance;
+      } else {
+        card.dataset.distance = '';
       }
       // Find or create distance tag
       let distTag = card.querySelector('.distance-tag');
@@ -139,7 +145,7 @@
         distTag.style.color = '#111';
         distTag.style.fontWeight = 'bold';
         distTag.style.fontSize = '0.98rem';
-  distTag.style.margin = '1px 0 12px 0';
+        distTag.style.margin = '1px 0 12px 0';
         // Insert directly under the card title (h3)
         const title = card.querySelector('.card-title');
         if (title && title.parentNode) {
@@ -148,8 +154,21 @@
           card.querySelector('.card-content').appendChild(distTag);
         }
       }
-      distTag.textContent = distance ? `${distance} mi away` : '';
+      distTag.textContent = (userCoord && destCoord) ? `${parseFloat(card.dataset.distance).toFixed(2)} mi away` : '';
     });
+
+    // Sort cards by distance
+    const visibleCards = cards.filter(card => card.style.display !== 'none');
+    visibleCards.sort(function(a, b) {
+      const da = parseFloat(a.dataset.distance);
+      const db = parseFloat(b.dataset.distance);
+      if (isNaN(da)) return 1;
+      if (isNaN(db)) return -1;
+      return da - db;
+    });
+    // Remove all cards from container and re-append in sorted order
+    visibleCards.forEach(card => cardContainer.appendChild(card));
+  
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -311,66 +330,66 @@
     <div style="display:flex;align-items:center;gap:10px;">
   <label for="user-location" style="font-weight:500;font-size:1.08rem;color:#38b2ac;margin-left:0;"><span style="font-size:1.18rem;vertical-align:middle;">🏠</span> Current Location:</label>
   <select id="user-location" name="user-location" style="padding:10px 4px 10px 4px;border:none;border-radius:24px;font-size:1.08rem;width:320px;background:#fff;color:#111;cursor:pointer;margin-left:0;">
-  <option value="1">Building 1</option>
-  <option value="2">Building 2</option>
-  <option value="3">Building 3</option>
-  <option value="4">Building 4</option>
-  <option value="5">Building 5</option>
-  <option value="6">Building 6</option>
-  <option value="7">Building 7</option>
-  <option value="8">Building 8</option>
-  <option value="9">Building 9</option>
-  <option value="10">Building 10</option>
-  <option value="16">Building 16</option>
-  <option value="17">Building 17</option>
-  <option value="20">Building 20</option>
-  <option value="25">Building 25</option>
-  <option value="30">Building 30</option>
-  <option value="31">Building 31</option>
-  <option value="33">Building 33 (Conference Center)</option>
-  <option value="34">Building 34</option>
-  <option value="36">Building 36</option>
-  <option value="37">Building 37</option>
-  <option value="40">Building 40</option>
-  <option value="50">Building 50</option>
-  <option value="83">Building 83</option>
-  <option value="88">Building 88</option>
-  <option value="92" selected>Building 92 (Visitor Center)</option>
-  <option value="99">Building 99</option>
-  <option value="109">Building 109</option>
-  <option value="110">Building 110</option>
-  <option value="111">Building 111</option>
-  <option value="112">Building 112</option>
-  <option value="113">Building 113</option>
-  <option value="114">Building 114</option>
-  <option value="115">Building 115</option>
-  <option value="120">Building 120</option>
-  <option value="121">Building 121</option>
-  <option value="122">Building 122</option>
-  <option value="123">Building 123</option>
-  <option value="124">Building 124</option>
-  <option value="125">Building 125</option>
-  <option value="126">Building 126</option>
-  <option value="127">Building 127</option>
-  <option value="128">Building 128</option>
-  <option value="129">Building 129</option>
-  <option value="131">Building 131</option>
-  <option value="OneEsterra">One Esterra</option>
-  <option value="RedWestA">RedWest A</option>
-  <option value="RedWestB">RedWest B</option>
-  <option value="RedWestC">RedWest C</option>
-  <option value="RedWestD">RedWest D</option>
-  <option value="RedWestE">RedWest E</option>
-  <option value="RedWestF">RedWest F</option>
-  <option value="StudiosA">Studios A</option>
-  <option value="StudiosB">Studios B</option>
-  <option value="StudiosC">Studios C</option>
-  <option value="StudiosD">Studios D</option>
-  <option value="StudiosE">Studios E</option>
-  <option value="StudiosF">Studios F</option>
-  <option value="StudiosG">Studios G</option>
-  <option value="StudiosH">Studios H</option>
-  <option value="TheCommons">The Commons</option>
+    <option value="1">Building 1</option>
+    <option value="2">Building 2</option>
+    <option value="3">Building 3</option>
+    <option value="4">Building 4</option>
+    <option value="5">Building 5</option>
+    <option value="6">Building 6</option>
+    <option value="7">Building 7</option>
+    <option value="8">Building 8</option>
+    <option value="9">Building 9</option>
+    <option value="10">Building 10</option>
+    <option value="16">Building 16</option>
+    <option value="17">Building 17</option>
+    <option value="20">Building 20</option>
+    <option value="25">Building 25</option>
+    <option value="30">Building 30</option>
+    <option value="31">Building 31</option>
+    <option value="33">Building 33 (Conference Center)</option>
+    <option value="34">Building 34</option>
+    <option value="36">Building 36</option>
+    <option value="37">Building 37</option>
+    <option value="40">Building 40</option>
+    <option value="50">Building 50</option>
+    <option value="83">Building 83</option>
+    <option value="88">Building 88</option>
+    <option value="92" selected>Building 92 (Visitor Center)</option>
+    <option value="99">Building 99</option>
+    <option value="109">Building 109</option>
+    <option value="110">Building 110</option>
+    <option value="111">Building 111</option>
+    <option value="112">Building 112</option>
+    <option value="113">Building 113</option>
+    <option value="114">Building 114</option>
+    <option value="115">Building 115</option>
+    <option value="120">Building 120</option>
+    <option value="121">Building 121</option>
+    <option value="122">Building 122</option>
+    <option value="123">Building 123</option>
+    <option value="124">Building 124</option>
+    <option value="125">Building 125</option>
+    <option value="126">Building 126</option>
+    <option value="127">Building 127</option>
+    <option value="128">Building 128</option>
+    <option value="129">Building 129</option>
+    <option value="131">Building 131</option>
+    <option value="OneEsterra">One Esterra</option>
+    <option value="RedWestA">RedWest A</option>
+    <option value="RedWestB">RedWest B</option>
+    <option value="RedWestC">RedWest C</option>
+    <option value="RedWestD">RedWest D</option>
+    <option value="RedWestE">RedWest E</option>
+    <option value="RedWestF">RedWest F</option>
+    <option value="StudiosA">Studios A</option>
+    <option value="StudiosB">Studios B</option>
+    <option value="StudiosC">Studios C</option>
+    <option value="StudiosD">Studios D</option>
+    <option value="StudiosE">Studios E</option>
+    <option value="StudiosF">Studios F</option>
+    <option value="StudiosG">Studios G</option>
+    <option value="StudiosH">Studios H</option>
+    <option value="TheCommons">The Commons</option>
 
       </select>
     </div>
