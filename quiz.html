@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Activity Quiz</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; margin: 0; }
+    .quiz-container { max-width: 400px; margin: 48px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(37,99,235,0.08); padding: 32px 28px; text-align: center; }
+    .quiz-title { font-size: 1.5rem; font-weight: bold; color: #38b2ac; margin-bottom: 18px; }
+    .quiz-question { font-size: 1.08rem; color: #222; margin-bottom: 16px; }
+    .quiz-options { margin-bottom: 24px; }
+    .quiz-options label { display: block; margin: 8px 0; font-size: 1rem; color: #444; cursor: pointer; }
+    .quiz-btn { background: #38b2ac; color: #fff; border: none; border-radius: 14px; padding: 10px 22px; font-size: 1.08rem; font-weight: 500; cursor: pointer; margin-top: 12px; }
+    .quiz-btn:active { background: #2c8c7a; }
+    .quiz-result { font-size: 1.12rem; color: #38b2ac; font-weight: 500; margin-top: 24px; }
+    .quiz-question-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #38b2ac;
+      margin-bottom: 18px;
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-question-title" id="question-title-0">Which building(s) are you in?</div>
+  <div class="quiz-question-title" id="question-title-1" style="display:none;">Pick a vibe:</div>
+  <div class="quiz-container">
+    <form id="quiz-form">
+      <div id="step-0" class="quiz-step">
+        <div class="quiz-options">
+          <label><input type="checkbox" name="building" value="4"> 4</label>
+          <label><input type="checkbox" name="building" value="5"> 5</label>
+          <label><input type="checkbox" name="building" value="7"> 7</label>
+          <label><input type="checkbox" name="building" value="16"> 16</label>
+          <label><input type="checkbox" name="building" value="28"> 28</label>
+          <label><input type="checkbox" name="building" value="31"> 31</label>
+          <label><input type="checkbox" name="building" value="40"> 40</label>
+          <label><input type="checkbox" name="building" value="92"> 92</label>
+          <div style="height:16px;"></div>
+          <label><input type="checkbox" name="building" value="any"> Any</label>
+        </div>
+        <button type="button" class="quiz-btn" id="next-0">Next →</button>
+      </div>
+      <div id="step-1" class="quiz-step" style="display:none;">
+        <div class="quiz-options">
+          <label><input type="radio" name="vibe" value="chill"> Chill</label>
+          <label><input type="radio" name="vibe" value="active"> Active</label>
+          <label><input type="radio" name="vibe" value="social"> Social</label>
+          <div style="height:16px;"></div>
+          <label><input type="radio" name="vibe" value="surprise"> Surprise me!</label>
+        </div>
+        <button type="button" class="quiz-btn" id="back-1" style="background:#e0e7ef;color:#7fdbff;margin-right:8px;">← Back</button>
+        <button type="submit" class="quiz-btn">Show me an activity!</button>
+      </div>
+    </form>
+    <div id="quiz-result" class="quiz-result" style="display:none;"></div>
+  </div>
+  <script>
+    // Disable other building checkboxes if 'Any' is selected
+    function updateBuildingCheckboxes() {
+      const anyCheckbox = document.querySelector('input[name="building"][value="any"]');
+      const buildingCheckboxes = Array.from(document.querySelectorAll('input[name="building"]')).filter(cb => cb.value !== 'any');
+      if (anyCheckbox.checked) {
+        buildingCheckboxes.forEach(cb => { cb.disabled = true; });
+      } else {
+        buildingCheckboxes.forEach(cb => { cb.disabled = false; });
+      }
+    }
+    document.querySelectorAll('input[name="building"]').forEach(cb => {
+      cb.addEventListener('change', updateBuildingCheckboxes);
+    });
+    // Initial state
+    updateBuildingCheckboxes();
+    const activities = [
+  { name: 'Karaoke Lounge', category: 'music', building: '5', vibe: 'social', link: 'Music/karaoke.html' },
+  { name: 'XBox Lounge', category: 'games', building: '4', vibe: 'active', link: 'Games/xbox.html' },
+  { name: 'Treehouse', category: 'funmeetingspaces', building: '31', vibe: 'chill', link: 'FunMeetingSpaces/treehouse.html' },
+  { name: 'Snack Market', category: 'coffee', building: '4', vibe: 'chill', link: 'Coffee/snack.html' },
+  { name: 'Breville Coffee Machine', category: 'coffee', building: '5', vibe: 'chill', link: 'Coffee/breville.html' },
+  { name: 'Nap Room', category: 'wellness', building: '16', vibe: 'chill', link: 'Wellness/naproom.html' },
+  { name: 'Basketball Court', category: 'movement', building: '92', vibe: 'active', link: 'Movement/basketball.html' },
+  { name: 'Library', category: 'learn', building: '7', vibe: 'chill', link: 'Learn/library.html' },
+  { name: 'Speakeasy / Secret Room', category: 'funmeetingspaces', building: '40', vibe: 'social', link: 'FunMeetingSpaces/speakeasy.html' },
+  { name: 'Acoustic Panel Wall', category: 'explore', building: '40', vibe: 'surprise', link: 'Explore/acousticpanel.html' }
+    ];
+    // Multi-step quiz navigation
+    let currentStep = 0;
+    function showStep(step) {
+      for (let i = 0; i < 2; i++) {
+        document.getElementById('step-' + i).style.display = (i === step) ? 'block' : 'none';
+        document.getElementById('question-title-' + i).style.display = (i === step) ? 'block' : 'none';
+      }
+      currentStep = step;
+    }
+    document.getElementById('next-0').onclick = function() { showStep(1); };
+    document.getElementById('back-1').onclick = function() { showStep(0); };
+
+    document.getElementById('quiz-form').onsubmit = function(e) {
+      e.preventDefault();
+      const buildings = Array.from(document.querySelectorAll('input[name="building"]:checked')).map(cb => cb.value);
+      const vibe = document.querySelector('input[name="vibe"]:checked')?.value;
+      let filtered = activities;
+      if (buildings.length && !buildings.includes('any')) {
+        filtered = filtered.filter(a => buildings.includes(a.building));
+      }
+      if (vibe) filtered = filtered.filter(a => a.vibe === vibe || vibe === 'surprise');
+      if (filtered.length) {
+        const pick = filtered[Math.floor(Math.random() * filtered.length)];
+  window.location.href = `${pick.link}`;
+      } else {
+        const resultDiv = document.getElementById('quiz-result');
+        resultDiv.innerHTML = 'No matching activity found. Try different options!';
+        resultDiv.style.display = 'block';
+      }
+    };
+  </script>
+</body>
+</html>
