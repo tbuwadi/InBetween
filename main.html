@@ -112,7 +112,7 @@
     // Try to extract building number from card's span text
     const spans = card.querySelectorAll('span');
     for (let span of spans) {
-      const match = span.textContent.match(/Building\s(\d+)/);
+      const match = span.textContent.match(/Building\s([\w]+)/);
       if (match) return match[1];
     }
     return null;
@@ -172,33 +172,64 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    function updateFilters() {
-      const allBuildingCheckbox = document.getElementById('building-all');
-      const checkedBuildings = Array.from(document.querySelectorAll('.building-checkbox:checked')).map(cb => cb.value);
-      const allCategoryCheckbox = document.getElementById('category-all');
-      const checkedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value);
+    function getCampusFromBuilding(building) {
+      if (["1","2","3","4","5","16","17","20","25","31","34","37","OneEsterra"].includes(building)) return "East";
+      if (["92","99","120","121","122","123","124","125","126","127","StudiosA","StudiosB","StudiosC","StudiosD","StudiosE","StudiosF","StudiosG","StudiosH","TheCommons"].includes(building)) return "West";
+      if (["127N","121N","122N","123N","124N","125N","126N"].includes(building)) return "North";
+      if (["RedWestA","RedWestB","RedWestC","RedWestD","RedWestE","RedWestF","88"].includes(building)) return "RedWest";
+      return "Other";
+    }
+
+    function updateCampusFilters() {
+      const campusCheckboxes = document.querySelectorAll('.campus-checkbox');
+      const allChecked = document.getElementById('campus-all').checked;
+      const campusLabel = document.getElementById('campus-selected-label');
+      // If 'All' is checked, disable other checkboxes and show all cards
+      if (allChecked) {
+        campusCheckboxes.forEach(cb => {
+          cb.disabled = true;
+          cb.checked = false;
+        });
+        campusLabel.textContent = 'All';
+      } else {
+        campusCheckboxes.forEach(cb => {
+          cb.disabled = false;
+        });
+        // Get checked campuses
+        const checkedCampuses = Array.from(campusCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+        campusLabel.textContent = checkedCampuses.length === 0 ? 'All' : checkedCampuses.map(campus => {
+          switch(campus) {
+            case 'East': return 'East Campus';
+            case 'West': return 'West Campus';
+            case 'North': return 'North Campus';
+            case 'RedWest': return 'RedWest Campus';
+            default: return campus;
+          }
+        }).join(', ');
+      }
+      const checked = Array.from(campusCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
       document.querySelectorAll('.category-card').forEach(function(card) {
         const span = card.querySelector('span');
-        const matchesBuilding = (allBuildingCheckbox.checked || checkedBuildings.length === 0)
-          ? true
-          : (span && (checkedBuildings.some(val => span.textContent.trim() === 'Building ' + val || span.textContent.trim().startsWith('Building ' + val + ', '))));
-        const matchesCategory = (allCategoryCheckbox.checked || checkedCategories.length === 0)
-          ? true
-          : (card.dataset.category && checkedCategories.includes(card.dataset.category));
-        if (matchesBuilding && matchesCategory) {
+        let buildingMatch = null;
+        if (span) {
+          const match = span.textContent.match(/Building\s([\w]+)/);
+          if (match) buildingMatch = match[1];
+        }
+        const campus = buildingMatch ? getCampusFromBuilding(buildingMatch) : null;
+        const matchesCampus = allChecked || checked.includes(campus);
+        if (matchesCampus) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
         }
       });
+      updateDistances();
     }
-    document.querySelectorAll('.building-checkbox, #building-all, .category-checkbox, #category-all').forEach(cb => {
-      cb.addEventListener('change', updateFilters);
-      cb.addEventListener('change', updateDistances);
+    document.querySelectorAll('.campus-checkbox, #campus-all').forEach(function(cb) {
+      cb.addEventListener('change', updateCampusFilters);
     });
-
     document.getElementById('user-location').addEventListener('change', updateDistances);
-    updateDistances();
+    updateCampusFilters();
 
     // Show activity card if activity param is present
     const params = new URLSearchParams(window.location.search);
@@ -335,7 +366,7 @@
     <option value="1">Building 1</option>
     <option value="2">Building 2</option>
     <option value="3">Building 3</option>
-    <option value="4">Building 4</option>
+      <option value="4">4</option>
     <option value="5">Building 5</option>
     <option value="6">Building 6</option>
     <option value="7">Building 7</option>
@@ -397,20 +428,17 @@
     </div>
     <span style="font-weight:500;font-size:1.08rem;color:#444;margin-right:18px;">Filter By:</span>
   <div style="position:relative;display:flex;align-items:center;gap:10px;">
-      <button id="building-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#38b2ac;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
-  <span style="font-size:1.18rem;">🏢</span> <span style="color:#111;font-weight:bold;">Building:</span> <span id="building-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
+      <button id="campus-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#38b2ac;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
+        <span style="font-size:1.18rem;">🏢</span> <span style="color:#111;font-weight:bold;">Campus:</span> <span id="campus-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
       </button>
-      <div id="building-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
-  <label class="filter-label"><input type="checkbox" id="building-all" class="filter-checkbox">All</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="4">4</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="5">5</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="7">7</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="16">16</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="28">28</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="31">31</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="40">40</label>
-  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="92">92</label>
+      <div id="campus-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
+        <label class="filter-label"><input type="checkbox" id="campus-all" class="filter-checkbox">All Campuses</label>
+  <label class="filter-label" style="color:#111;"><input type="checkbox" class="campus-checkbox filter-checkbox" value="East"><span style="margin-left:6px;">East Campus</span></label>
+  <label class="filter-label" style="color:#111;"><input type="checkbox" class="campus-checkbox filter-checkbox" value="West"><span style="margin-left:6px;">West Campus</span></label>
+  <label class="filter-label" style="color:#111;"><input type="checkbox" class="campus-checkbox filter-checkbox" value="North"><span style="margin-left:6px;">North Campus</span></label>
+  <label class="filter-label" style="color:#111;"><input type="checkbox" class="campus-checkbox filter-checkbox" value="RedWest"><span style="margin-left:6px;">RedWest Campus</span></label>
       </div>
+
     </div>
     <div style="position:relative;">
       <button id="category-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#2563eb;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
@@ -444,54 +472,66 @@
         }
       });
     }
-    setupDropdownMenu('building-filter-btn', 'building-filter-menu');
+  setupDropdownMenu('campus-filter-btn', 'campus-filter-menu');
     setupDropdownMenu('category-filter-btn', 'category-filter-menu');
 
-    // Show current selections for building and category in the filter button itself
-    function updateSelectedLabels() {
-      // Building
-      const allBuilding = document.getElementById('building-all');
-      const buildingCheckboxes = document.querySelectorAll('.building-checkbox');
-      const checkedBuildings = Array.from(buildingCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-      const buildingLabel = document.getElementById('building-selected-label');
-      if (allBuilding.checked) {
-        buildingLabel.textContent = 'All';
-        buildingCheckboxes.forEach(cb => {
-          cb.disabled = true;
-        });
-        allBuilding.disabled = false;
-      } else {
-        buildingLabel.textContent = checkedBuildings.length === 0 ? 'All' : checkedBuildings.join(', ');
-        buildingCheckboxes.forEach(cb => {
-          cb.disabled = false;
-        });
-        allBuilding.disabled = false;
-      }
-      // Category
+    // Show current selections for category in the filter button itself and filter cards
+    function updateCategoryFilterUI() {
       const allCategory = document.getElementById('category-all');
       const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
-      const checkedCategories = Array.from(categoryCheckboxes).filter(cb => cb.checked).map(cb => cb.nextSibling.textContent.trim());
       const categoryLabel = document.getElementById('category-selected-label');
+      const cardContainer = document.getElementById('card-container');
+      const allCards = document.querySelectorAll('.category-card');
+      // If 'All' is checked, disable other checkboxes and show all cards
       if (allCategory.checked) {
         categoryLabel.textContent = 'All';
         categoryCheckboxes.forEach(cb => {
           cb.disabled = true;
+          cb.checked = false;
         });
         allCategory.disabled = false;
+        allCards.forEach(card => card.style.display = 'flex');
       } else {
-        categoryLabel.textContent = checkedCategories.length === 0 ? 'All' : checkedCategories.join(', ');
         categoryCheckboxes.forEach(cb => {
           cb.disabled = false;
         });
         allCategory.disabled = false;
+        // Get checked categories
+        const checkedCategories = Array.from(categoryCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+        categoryLabel.textContent = checkedCategories.length === 0 ? 'All' : checkedCategories.map(cat => {
+          // Map value to label text
+          switch(cat) {
+            case 'music': return 'Music';
+            case 'coffee': return 'Coffee & Snacks';
+            case 'wellness': return 'Wellness';
+            case 'games': return 'Games';
+            case 'movement': return 'Movement';
+            case 'learn': return 'Learn';
+            case 'explore': return 'Explore Campus';
+            case 'funmeetingspaces': return 'Meeting Spaces';
+            default: return cat;
+          }
+        }).join(', ');
+        // Show/hide cards by selected categories
+        if (checkedCategories.length === 0) {
+          allCards.forEach(card => card.style.display = 'flex');
+        } else {
+          allCards.forEach(card => {
+            if (checkedCategories.includes(card.dataset.category)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
       }
     }
-    // Update labels and disable/enable checkboxes on change
-    document.querySelectorAll('.building-checkbox, #building-all, .category-checkbox, #category-all').forEach(cb => {
-      cb.addEventListener('change', updateSelectedLabels);
+    // Add event listeners for category filter checkboxes
+    document.querySelectorAll('.category-checkbox, #category-all').forEach(cb => {
+      cb.addEventListener('change', updateCategoryFilterUI);
     });
     // Initial label update
-    updateSelectedLabels();
+    updateCategoryFilterUI();
   </script>
     <div id="card-container" class="card-container" style="display:none;">
       <!-- Fun Meeting Spaces -->
@@ -501,7 +541,7 @@
           <h3 class="card-title">Treehouse</h3>
           <p class="card-desc">Hold your next meeting in a unique treehouse space in Building 31. Enjoy creative vibes and a view from above!</p>
           <span class="tag-green">Building 31</span>
-  <span class="tag-blue left">West Campus</span>
+          <span class="tag-west left">West Campus</span>
   </div>
       </a>
       <!-- Music -->
@@ -511,7 +551,7 @@
           <h3 class="card-title">Karaoke Lounge</h3>
           <p class="card-desc">Sing your heart out in our dedicated karaoke lounge, equipped with the latest sound system and a wide selection of songs.</p>
           <span class="tag-green">Building 5, Floor 4</span>
-  <span class="tag-blue left">East Campus</span>
+          <span class="tag-east left">East Campus</span>
   </div>
       </a>
   <a href="activities/games/xbox.html" class="category-card" data-category="games">
@@ -519,8 +559,8 @@
           <div class="card-content">
             <h3 class="card-title">XBox Lounge</h3>
             <p class="card-desc">Relax and play the latest games in our XBox Lounge, equipped with comfy seating and a big screen.</p>
-            <span class="tag-green">Building 4, Floor 4</span>
-  <span class="tag-blue left">East Campus</span>
+          <span class="tag-green">Building 4, Floor 4</span>
+          <span class="tag-east left">East Campus</span>
           </div>
         </a>
       <!-- Coffee & Snacks -->
@@ -530,7 +570,7 @@
             <h3 class="card-title">Snack Market</h3>
             <p class="card-desc">Grab a quick snack from the vending machines or market in Building 4. Perfect for a midday energy boost!</p>
             <span class="tag-green">Building 4, Floor 1</span>
-  <span class="tag-blue left">East Campus</span>
+            <span class="tag-east left">East Campus</span>
           </div>
         </a>
   <a href="activities/coffee/breville.html" class="category-card" data-category="coffee">
@@ -539,7 +579,7 @@
             <h3 class="card-title">Breville Coffee Machine</h3>
             <p class="card-desc">Enjoy premium coffee from our new Breville machine, available for all employees in the lounge.</p>
             <span class="tag-green">Building 5, Floor 4</span>
-  <span class="tag-blue left">East Campus</span>
+            <span class="tag-east left">East Campus</span>
           </div>
         </a>
       <!-- Wellness -->
@@ -549,7 +589,7 @@
               <h3 class="card-title">Nap Room</h3>
               <p class="card-desc">Recharge in our quiet nap room, designed for short breaks and relaxation during your workday.</p>
               <span class="tag-green">Building 16, Floor 2</span>
-  <span class="tag-blue left">East Campus</span>
+              <span class="tag-east left">East Campus</span>
       </div>
           </a>
       </a>
@@ -560,7 +600,7 @@
           <h3 class="card-title">Mini Golf</h3>
           <p class="card-desc">Play a round of mini golf on campus! Challenge friends or enjoy a relaxing break with a putter and colorful obstacles.</p>
           <span class="tag-green">Building 7, Floor 2</span>
-  <span class="tag-blue left">East Campus</span>
+          <span class="tag-east left">East Campus</span>
   </div>
       </a>
   <a href="activities/movement/basketball.html" class="category-card" data-category="movement">
@@ -569,7 +609,7 @@
             <h3 class="card-title">Basketball Court</h3>
             <p class="card-desc">Shoot hoops and play basketball with friends. The court is open for casual games and team matches.</p>
             <span class="tag-green">Building 92, Floor 1</span>
-  <span class="tag-blue left">Central Campus</span>
+            <span class="tag-central left">Central Campus</span>
           </div>
         </a>
       <!-- Learn Something -->
@@ -579,7 +619,7 @@
           <h3 class="card-title">Library</h3>
           <p class="card-desc">Visit the campus library to read, study, or borrow books and resources for personal and professional growth.</p>
           <span class="tag-green">Building 7, Floor 2</span>
-  <span class="tag-blue left">East Campus</span>
+          <span class="tag-east left">East Campus</span>
   </div>
       </a>
       <!-- Explore Campus -->
@@ -589,7 +629,7 @@
           <h3 class="card-title">Speakeasy / Secret Room</h3>
           <p class="card-desc">Discover the hidden speakeasy on campus—a secret room for quiet meetings, creative sessions, or just a fun surprise.</p>
           <span class="tag-green">Building 40, Floor 3</span>
-  <span class="tag-blue left">West Campus</span>
+          <span class="tag-west left">West Campus</span>
   </div>
       </a>
       <!-- Explore Campus: Acoustic Panel Wall -->
@@ -599,7 +639,7 @@
           <h3 class="card-title">Acoustic Panel Wall</h3>
           <p class="card-desc">Experience the innovative acoustic panel wall in Building 40.</p>
           <span class="tag-green">Building 40, Floor 3</span>
-  <span class="tag-blue left">West Campus</span>
+          <span class="tag-west left">West Campus</span>
   </div>
       </a>
     </div>
