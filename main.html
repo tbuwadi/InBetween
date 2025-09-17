@@ -270,7 +270,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Page - In Between</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/tag-styles.css">
+  <link rel="stylesheet" href="styles/sidebar-styles.css">
   <link rel="stylesheet" href="tag-styles.css">
 
 </head>
@@ -329,7 +331,7 @@
   <div style="display:flex;align-items:center;gap:24px;margin-bottom:28px;">
     <div style="display:flex;align-items:center;gap:10px;">
   <label for="user-location" style="font-weight:500;font-size:1.08rem;color:#38b2ac;margin-left:0;"><span style="font-size:1.18rem;vertical-align:middle;">🏠</span> Current Location:</label>
-  <select id="user-location" name="user-location" style="padding:10px 4px 10px 4px;border:none;border-radius:24px;font-size:1.08rem;width:320px;background:#fff;color:#111;cursor:pointer;margin-left:0;">
+  <select id="user-location" name="user-location" style="padding:10px 24px 10px 4px;border:none;border-radius:24px;font-size:1.08rem;width:320px;background:#fff;color:#111;cursor:pointer;margin-left:0;">
     <option value="1">Building 1</option>
     <option value="2">Building 2</option>
     <option value="3">Building 3</option>
@@ -399,15 +401,15 @@
   <span style="font-size:1.18rem;">🏢</span> <span style="color:#111;font-weight:bold;">Building:</span> <span id="building-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
       </button>
       <div id="building-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" id="building-all" style="accent-color:#2563eb;margin:0 4px 0 0;">All</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="4" style="accent-color:#2563eb;margin:0 4px 0 0;">4</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="5" style="accent-color:#2563eb;margin:0 4px 0 0;">5</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="7" style="accent-color:#2563eb;margin:0 4px 0 0;">7</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="16" style="accent-color:#2563eb;margin:0 4px 0 0;">16</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="28" style="accent-color:#2563eb;margin:0 4px 0 0;">28</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="31" style="accent-color:#2563eb;margin:0 4px 0 0;">31</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="40" style="accent-color:#2563eb;margin:0 4px 0 0;">40</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="building-checkbox" value="92" style="accent-color:#2563eb;margin:0 4px 0 0;">92</label>
+  <label class="filter-label"><input type="checkbox" id="building-all" class="filter-checkbox">All</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="4">4</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="5">5</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="7">7</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="16">16</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="28">28</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="31">31</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="40">40</label>
+  <label class="filter-label"><input type="checkbox" class="building-checkbox filter-checkbox" value="92">92</label>
       </div>
     </div>
     <div style="position:relative;">
@@ -415,15 +417,15 @@
   <span style="font-size:1.18rem;">📋</span> <span style="color:#111;font-weight:bold;">Category:</span> <span id="category-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
       </button>
       <div id="category-filter-menu" style="display:none;position:absolute;top:110%;left:0;z-index:10;background:#fff;border:1.5px solid #e0e7ef;border-radius:18px;box-shadow:0 2px 12px rgba(37,99,235,0.10);padding:14px 18px;min-width:180px;">
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" id="category-all" style="accent-color:#2563eb;margin:0 4px 0 0;">All</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="music" style="accent-color:#2563eb;margin:0 4px 0 0;">Music</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="coffee" style="accent-color:#2563eb;margin:0 4px 0 0;">Coffee & Snacks</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="wellness" style="accent-color:#2563eb;margin:0 4px 0 0;">Wellness</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="games" style="accent-color:#2563eb;margin:0 4px 0 0;">Games</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="movement" style="accent-color:#2563eb;margin:0 4px 0 0;">Movement</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="learn" style="accent-color:#2563eb;margin:0 4px 0 0;">Learn</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="explore" style="accent-color:#2563eb;margin:0 4px 0 0;">Explore Campus</label>
-  <label style="display:flex;align-items:center;gap:6px;font-size:1.05rem;color:#111;font-weight:400;margin-bottom:8px;user-select:none;"><input type="checkbox" class="category-checkbox" value="funmeetingspaces" style="accent-color:#2563eb;margin:0 4px 0 0;">Meeting Spaces</label>
+  <label class="filter-label"><input type="checkbox" id="category-all" class="filter-checkbox">All</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="music">Music</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="coffee">Coffee & Snacks</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="wellness">Wellness</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="games">Games</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="movement">Movement</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="learn">Learn</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="explore">Explore Campus</label>
+  <label class="filter-label"><input type="checkbox" class="category-checkbox filter-checkbox" value="funmeetingspaces">Meeting Spaces</label>
       </div>
     </div>
   </div>
@@ -493,58 +495,58 @@
   </script>
     <div id="card-container" class="card-container" style="display:none;">
       <!-- Fun Meeting Spaces -->
-      <a href="funmeetingspaces/treehouse.html" class="category-card" data-category="funmeetingspaces">
+  <a href="activities/funmeetingspaces/treehouse.html" class="category-card" data-category="funmeetingspaces">
         <img src="images/treehouseb31.png" alt="Treehouse Meeting Room" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Treehouse</h3>
+          <h3 class="card-title">Treehouse</h3>
           <p class="card-desc">Hold your next meeting in a unique treehouse space in Building 31. Enjoy creative vibes and a view from above!</p>
           <span class="tag-green">Building 31</span>
-  <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">West Campus</span>
+  <span class="tag-blue left">West Campus</span>
   </div>
       </a>
       <!-- Music -->
-      <a href="music/karaoke.html" class="category-card" data-category="music">
+  <a href="activities/music/karaoke.html" class="category-card" data-category="music">
   <img src="images/karaokeb4.png" alt="Karaoke Lounge" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Karaoke Lounge</h3>
+          <h3 class="card-title">Karaoke Lounge</h3>
           <p class="card-desc">Sing your heart out in our dedicated karaoke lounge, equipped with the latest sound system and a wide selection of songs.</p>
           <span class="tag-green">Building 5, Floor 4</span>
   <span class="tag-blue left">East Campus</span>
   </div>
       </a>
-        <a href="games/xbox.html" class="category-card" data-category="games">
+  <a href="activities/games/xbox.html" class="category-card" data-category="games">
   <img src="images/xboxloungeb4.png" alt="XBox Lounge" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">XBox Lounge</h3>
+            <h3 class="card-title">XBox Lounge</h3>
             <p class="card-desc">Relax and play the latest games in our XBox Lounge, equipped with comfy seating and a big screen.</p>
             <span class="tag-green">Building 4, Floor 4</span>
-        <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">East Campus</span>
+  <span class="tag-blue left">East Campus</span>
           </div>
         </a>
       <!-- Coffee & Snacks -->
-        <a href="coffee/snack.html" class="category-card" data-category="coffee">
+  <a href="activities/coffee/snack.html" class="category-card" data-category="coffee">
           <img src="images/snackb4.png" alt="Snack Market" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Snack Market</h3>
+            <h3 class="card-title">Snack Market</h3>
             <p class="card-desc">Grab a quick snack from the vending machines or market in Building 4. Perfect for a midday energy boost!</p>
             <span class="tag-green">Building 4, Floor 1</span>
   <span class="tag-blue left">East Campus</span>
           </div>
         </a>
-        <a href="coffee/breville.html" class="category-card" data-category="coffee">
+  <a href="activities/coffee/breville.html" class="category-card" data-category="coffee">
           <img src="images/brevilleb4.png" alt="Breville Coffee Machine" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Breville Coffee Machine</h3>
+            <h3 class="card-title">Breville Coffee Machine</h3>
             <p class="card-desc">Enjoy premium coffee from our new Breville machine, available for all employees in the lounge.</p>
             <span class="tag-green">Building 5, Floor 4</span>
   <span class="tag-blue left">East Campus</span>
           </div>
         </a>
       <!-- Wellness -->
-          <a href="wellness/naproom.html" class="category-card" data-category="wellness">
+          <a href="activities/wellness/naproom.html" class="category-card" data-category="wellness">
             <img src="images/naproomb16.png" alt="Nap Room" class="card-img" />
             <div class="card-content">
-              <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Nap Room</h3>
+              <h3 class="card-title">Nap Room</h3>
               <p class="card-desc">Recharge in our quiet nap room, designed for short breaks and relaxation during your workday.</p>
               <span class="tag-green">Building 16, Floor 2</span>
   <span class="tag-blue left">East Campus</span>
@@ -552,49 +554,49 @@
           </a>
       </a>
       <!-- Movement -->
-      <a href="movement/soccer.html" class="category-card" data-category="movement">
+  <a href="activities/movement/soccer.html" class="category-card" data-category="movement">
         <img src="images/minigolfb7.png" alt="Mini Golf" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Mini Golf</h3>
+          <h3 class="card-title">Mini Golf</h3>
           <p class="card-desc">Play a round of mini golf on campus! Challenge friends or enjoy a relaxing break with a putter and colorful obstacles.</p>
           <span class="tag-green">Building 7, Floor 2</span>
   <span class="tag-blue left">East Campus</span>
   </div>
       </a>
-        <a href="movement/basketball.html" class="category-card" data-category="movement">
+  <a href="activities/movement/basketball.html" class="category-card" data-category="movement">
           <img src="images/basketballb92.jpg" alt="Basketball Court" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Basketball Court</h3>
+            <h3 class="card-title">Basketball Court</h3>
             <p class="card-desc">Shoot hoops and play basketball with friends. The court is open for casual games and team matches.</p>
             <span class="tag-green">Building 92, Floor 1</span>
   <span class="tag-blue left">Central Campus</span>
           </div>
         </a>
       <!-- Learn Something -->
-      <a href="learn/library.html" class="category-card" data-category="learn">
+  <a href="activities/learn/library.html" class="category-card" data-category="learn">
   <img src="images/libraryb7.png" alt="Library" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Library</h3>
+          <h3 class="card-title">Library</h3>
           <p class="card-desc">Visit the campus library to read, study, or borrow books and resources for personal and professional growth.</p>
-          <span class="tag-green">Building 7</span>
+          <span class="tag-green">Building 7, Floor 2</span>
   <span class="tag-blue left">East Campus</span>
   </div>
       </a>
       <!-- Explore Campus -->
-  <a href="funmeetingspaces/speakeasy.html" class="category-card" data-category="funmeetingspaces">
+  <a href="activities/funmeetingspaces/speakeasy.html" class="category-card" data-category="funmeetingspaces">
   <img src="images/speakeasyb40.png" alt="Speakeasy / Secret Room" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Speakeasy / Secret Room</h3>
+          <h3 class="card-title">Speakeasy / Secret Room</h3>
           <p class="card-desc">Discover the hidden speakeasy on campus—a secret room for quiet meetings, creative sessions, or just a fun surprise.</p>
           <span class="tag-green">Building 40, Floor 3</span>
-  <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:0.92rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">West Campus</span>
+  <span class="tag-blue left">West Campus</span>
   </div>
       </a>
       <!-- Explore Campus: Acoustic Panel Wall -->
-      <a href="explore/acousticpanel.html" class="category-card" data-category="explore">
+  <a href="activities/explore/acousticpanel.html" class="category-card" data-category="explore">
   <img src="images/acousticpanelwallb40.png" alt="Acoustic Panel Wall" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Acoustic Panel Wall</h3>
+          <h3 class="card-title">Acoustic Panel Wall</h3>
           <p class="card-desc">Experience the innovative acoustic panel wall in Building 40.</p>
           <span class="tag-green">Building 40, Floor 3</span>
   <span class="tag-blue left">West Campus</span>
