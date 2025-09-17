@@ -1,6 +1,157 @@
     </main>
 </div>
 <script>
+  // Building coordinates (example, replace with actual values)
+  const buildingCoords = {
+  // Updated/Additional Buildings
+  '6': {lat: 47.6415, lng: -122.1287},
+  '7': {lat: 47.6414, lng: -122.1285},
+  '8': {lat: 47.6415, lng: -122.1287},
+  '9': {lat: 47.6415, lng: -122.1287},
+  '10': {lat: 47.6413, lng: -122.1283},
+  '20': {lat: 47.6412, lng: -122.1281},
+  '25': {lat: 47.6411, lng: -122.1279},
+  '30': {lat: 47.641, lng: -122.1277},
+  '33': {lat: 47.6409, lng: -122.1275},
+  '34': {lat: 47.6408, lng: -122.1273},
+  '36': {lat: 47.6407, lng: -122.1271},
+  '40': {lat: 47.6406, lng: -122.1269},
+  '50': {lat: 47.6405, lng: -122.1267},
+  '83': {lat: 47.6404, lng: -122.1265},
+  '88': {lat: 47.6403, lng: -122.1263},
+  '99': {lat: 47.6402, lng: -122.1261},
+  '109': {lat: 47.6401, lng: -122.1259},
+  '110': {lat: 47.6401, lng: -122.1259},
+  '111': {lat: 47.6401, lng: -122.1259},
+  '112': {lat: 47.6401, lng: -122.1259},
+  '113': {lat: 47.6401, lng: -122.1259},
+  '114': {lat: 47.6401, lng: -122.1259},
+  '115': {lat: 47.6401, lng: -122.1259},
+  '120': {lat: 47.64, lng: -122.1257},
+  '121': {lat: 47.64, lng: -122.1257},
+  '122': {lat: 47.64, lng: -122.1257},
+  '123': {lat: 47.64, lng: -122.1257},
+  '124': {lat: 47.64, lng: -122.1257},
+  '125': {lat: 47.64, lng: -122.1257},
+  '126': {lat: 47.64, lng: -122.1257},
+  '127': {lat: 47.64, lng: -122.1257},
+  'RedWestA': {lat: 47.6398, lng: -122.1253},
+  'RedWestB': {lat: 47.6398, lng: -122.1253},
+  'RedWestC': {lat: 47.6398, lng: -122.1253},
+  'RedWestD': {lat: 47.6398, lng: -122.1253},
+  'RedWestE': {lat: 47.6398, lng: -122.1253},
+  'RedWestF': {lat: 47.6398, lng: -122.1253},
+  'OneEsterra': {lat: 47.6397, lng: -122.1251},
+    // East Campus
+    '1': {lat: 47.643543, lng: -122.130821},
+    '2': {lat: 47.6436, lng: -122.1309},
+    '3': {lat: 47.6437, lng: -122.131},
+    '4': {lat: 47.6438, lng: -122.1311},
+    '5': {lat: 47.6439, lng: -122.1312},
+    '16': {lat: 47.644, lng: -122.1313},
+    '17': {lat: 47.6441, lng: -122.1314},
+    '20': {lat: 47.6442, lng: -122.1315},
+    '25': {lat: 47.6443, lng: -122.1316},
+    '31': {lat: 47.6444, lng: -122.1317},
+    '34': {lat: 47.6445, lng: -122.1318},
+    '37': {lat: 47.6446, lng: -122.1319},
+    'OneEsterra': {lat: 47.6447, lng: -122.132},
+
+    // West Campus
+    '92': {lat: 47.642232, lng: -122.136791},
+    '99': {lat: 47.6423, lng: -122.1369},
+    '120': {lat: 47.6424, lng: -122.137},
+    '121': {lat: 47.6425, lng: -122.1371},
+    '122': {lat: 47.6426, lng: -122.1372},
+    '123': {lat: 47.6427, lng: -122.1373},
+    '124': {lat: 47.6428, lng: -122.1374},
+    '125': {lat: 47.6429, lng: -122.1375},
+    '126': {lat: 47.643, lng: -122.1376},
+    '127': {lat: 47.6431, lng: -122.1377},
+    'StudiosA': {lat: 47.6432, lng: -122.1378},
+    'StudiosB': {lat: 47.6432, lng: -122.1378},
+    'StudiosC': {lat: 47.6432, lng: -122.1378},
+    'StudiosD': {lat: 47.6432, lng: -122.1378},
+    'StudiosE': {lat: 47.6432, lng: -122.1378},
+    'StudiosF': {lat: 47.6432, lng: -122.1378},
+    'StudiosG': {lat: 47.6432, lng: -122.1378},
+    'StudiosH': {lat: 47.6432, lng: -122.1378},
+    'TheCommons': {lat: 47.6433, lng: -122.1379},
+
+    // North Campus
+    '127N': {lat: 47.645, lng: -122.138},
+    '121N': {lat: 47.6451, lng: -122.1381},
+    '122N': {lat: 47.6452, lng: -122.1382},
+    '123N': {lat: 47.6453, lng: -122.1383},
+    '124N': {lat: 47.6454, lng: -122.1384},
+    '125N': {lat: 47.6455, lng: -122.1385},
+    '126N': {lat: 47.6456, lng: -122.1386},
+
+    // RedWest Campus
+    'RedWestB': {lat: 47.64, lng: -122.14},
+    '88': {lat: 47.6401, lng: -122.1401},
+
+    // Special Facilities
+    'MicrosoftHQ': {lat: 47.643543, lng: -122.130821},
+    '33': {lat: 47.6434, lng: -122.1325}, // Microsoft Conference Center
+    'Treehouses': {lat: 47.642887, lng: -122.121506}
+  };
+
+  function haversineDistance(lat1, lng1, lat2, lng2) {
+    function toRad(x) { return x * Math.PI / 180; }
+    const R = 3958.8; // miles
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+
+  function getBuildingFromCard(card) {
+    // Try to extract building number from card's span text
+    const spans = card.querySelectorAll('span');
+    for (let span of spans) {
+      const match = span.textContent.match(/Building\s(\d+)/);
+      if (match) return match[1];
+    }
+    return null;
+  }
+
+  function updateDistances() {
+    const userSelect = document.getElementById('user-location');
+    const userBuilding = userSelect.value;
+    const userCoord = buildingCoords[userBuilding];
+    document.querySelectorAll('.category-card').forEach(function(card) {
+      const destBuilding = getBuildingFromCard(card);
+      const destCoord = buildingCoords[destBuilding];
+      let distance = '';
+      if (userCoord && destCoord) {
+        distance = haversineDistance(userCoord.lat, userCoord.lng, destCoord.lat, destCoord.lng).toFixed(2);
+      }
+      // Find or create distance tag
+      let distTag = card.querySelector('.distance-tag');
+      if (!distTag) {
+        distTag = document.createElement('div');
+        distTag.className = 'distance-tag';
+        distTag.style.display = 'block';
+        distTag.style.color = '#111';
+        distTag.style.fontWeight = 'bold';
+        distTag.style.fontSize = '0.98rem';
+  distTag.style.margin = '1px 0 12px 0';
+        // Insert directly under the card title (h3)
+        const title = card.querySelector('.card-title');
+        if (title && title.parentNode) {
+          title.parentNode.insertBefore(distTag, title.nextSibling);
+        } else {
+          card.querySelector('.card-content').appendChild(distTag);
+        }
+      }
+      distTag.textContent = distance ? `${distance} mi away` : '';
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     function updateFilters() {
       const allBuildingCheckbox = document.getElementById('building-all');
@@ -24,7 +175,11 @@
     }
     document.querySelectorAll('.building-checkbox, #building-all, .category-checkbox, #category-all').forEach(cb => {
       cb.addEventListener('change', updateFilters);
+      cb.addEventListener('change', updateDistances);
     });
+
+    document.getElementById('user-location').addEventListener('change', updateDistances);
+    updateDistances();
 
     // Show activity card if activity param is present
     const params = new URLSearchParams(window.location.search);
@@ -47,7 +202,6 @@
         cardContainer.insertAdjacentHTML('beforeend', `<div style="color:#e53e3e;font-weight:500;margin:24px auto;">No matching activity found.</div>`);
       }
     }
-    // ...existing code...
   });
   // Show cards when any category is clicked
   document.addEventListener('DOMContentLoaded', function() {
@@ -98,6 +252,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Page - In Between</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tag-styles.css">
+
 </head>
 <body>
   <div class="main-layout">
@@ -152,8 +308,74 @@
   <h1>Discover what’s possible in <span style="color:#38b2ac;font-weight:bold;">In&nbsp;Between</span> work</h1>
   <!-- Filters removed as requested -->
   <div style="display:flex;align-items:center;gap:24px;margin-bottom:28px;">
-  <span style="font-weight:500;font-size:1.08rem;color:#444;margin-right:18px;">Filter By:</span>
-    <div style="position:relative;display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+  <label for="user-location" style="font-weight:500;font-size:1.08rem;color:#38b2ac;margin-left:0;"><span style="font-size:1.18rem;vertical-align:middle;">🏠</span> Current Location:</label>
+  <select id="user-location" name="user-location" style="padding:10px 4px 10px 4px;border:none;border-radius:24px;font-size:1.08rem;width:320px;background:#fff;color:#111;cursor:pointer;margin-left:0;">
+  <option value="1">Building 1</option>
+  <option value="2">Building 2</option>
+  <option value="3">Building 3</option>
+  <option value="4">Building 4</option>
+  <option value="5">Building 5</option>
+  <option value="6">Building 6</option>
+  <option value="7">Building 7</option>
+  <option value="8">Building 8</option>
+  <option value="9">Building 9</option>
+  <option value="10">Building 10</option>
+  <option value="16">Building 16</option>
+  <option value="17">Building 17</option>
+  <option value="20">Building 20</option>
+  <option value="25">Building 25</option>
+  <option value="30">Building 30</option>
+  <option value="31">Building 31</option>
+  <option value="33">Building 33 (Conference Center)</option>
+  <option value="34">Building 34</option>
+  <option value="36">Building 36</option>
+  <option value="37">Building 37</option>
+  <option value="40">Building 40</option>
+  <option value="50">Building 50</option>
+  <option value="83">Building 83</option>
+  <option value="88">Building 88</option>
+  <option value="92" selected>Building 92 (Visitor Center)</option>
+  <option value="99">Building 99</option>
+  <option value="109">Building 109</option>
+  <option value="110">Building 110</option>
+  <option value="111">Building 111</option>
+  <option value="112">Building 112</option>
+  <option value="113">Building 113</option>
+  <option value="114">Building 114</option>
+  <option value="115">Building 115</option>
+  <option value="120">Building 120</option>
+  <option value="121">Building 121</option>
+  <option value="122">Building 122</option>
+  <option value="123">Building 123</option>
+  <option value="124">Building 124</option>
+  <option value="125">Building 125</option>
+  <option value="126">Building 126</option>
+  <option value="127">Building 127</option>
+  <option value="128">Building 128</option>
+  <option value="129">Building 129</option>
+  <option value="131">Building 131</option>
+  <option value="OneEsterra">One Esterra</option>
+  <option value="RedWestA">RedWest A</option>
+  <option value="RedWestB">RedWest B</option>
+  <option value="RedWestC">RedWest C</option>
+  <option value="RedWestD">RedWest D</option>
+  <option value="RedWestE">RedWest E</option>
+  <option value="RedWestF">RedWest F</option>
+  <option value="StudiosA">Studios A</option>
+  <option value="StudiosB">Studios B</option>
+  <option value="StudiosC">Studios C</option>
+  <option value="StudiosD">Studios D</option>
+  <option value="StudiosE">Studios E</option>
+  <option value="StudiosF">Studios F</option>
+  <option value="StudiosG">Studios G</option>
+  <option value="StudiosH">Studios H</option>
+  <option value="TheCommons">The Commons</option>
+
+      </select>
+    </div>
+    <span style="font-weight:500;font-size:1.08rem;color:#444;margin-right:18px;">Filter By:</span>
+  <div style="position:relative;display:flex;align-items:center;gap:10px;">
       <button id="building-filter-btn" style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e7ef;border-radius:24px;padding:10px 22px;font-size:1.08rem;color:#38b2ac;font-weight:500;box-shadow:0 2px 12px rgba(37,99,235,0.06);cursor:pointer;">
   <span style="font-size:1.18rem;">🏢</span> <span style="color:#111;font-weight:bold;">Building:</span> <span id="building-selected-label" style="color:#888;font-weight:400;margin-left:4px;"></span> <span style="font-size:0.85rem;color:#888;">▼</span>
       </button>
@@ -255,98 +477,109 @@
       <a href="funmeetingspaces/treehouse.html" class="category-card" data-category="funmeetingspaces">
         <img src="images/treehouseb31.png" alt="Treehouse Meeting Room" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Treehouse</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Treehouse</h3>
           <p class="card-desc">Hold your next meeting in a unique treehouse space in Building 31. Enjoy creative vibes and a view from above!</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 31</span>
-        </div>
+          <span class="tag-green">Building 31</span>
+  <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">West Campus</span>
+  </div>
       </a>
       <!-- Music -->
       <a href="music/karaoke.html" class="category-card" data-category="music">
   <img src="images/karaokeb4.png" alt="Karaoke Lounge" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Karaoke Lounge</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Karaoke Lounge</h3>
           <p class="card-desc">Sing your heart out in our dedicated karaoke lounge, equipped with the latest sound system and a wide selection of songs.</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 5, Floor 4</span>
-        </div>
+          <span class="tag-green">Building 5, Floor 4</span>
+  <span class="tag-blue left">East Campus</span>
+  </div>
       </a>
         <a href="games/xbox.html" class="category-card" data-category="games">
   <img src="images/xboxloungeb4.png" alt="XBox Lounge" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title">XBox Lounge</h3>
+            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">XBox Lounge</h3>
             <p class="card-desc">Relax and play the latest games in our XBox Lounge, equipped with comfy seating and a big screen.</p>
-            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 4, Floor 4</span>
+            <span class="tag-green">Building 4, Floor 4</span>
+        <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">East Campus</span>
           </div>
         </a>
       <!-- Coffee & Snacks -->
         <a href="coffee/snack.html" class="category-card" data-category="coffee">
           <img src="images/snackb4.png" alt="Snack Market" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title">Snack Market</h3>
+            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Snack Market</h3>
             <p class="card-desc">Grab a quick snack from the vending machines or market in Building 4. Perfect for a midday energy boost!</p>
-            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 4, Floor 1</span>
+            <span class="tag-green">Building 4, Floor 1</span>
+  <span class="tag-blue left">East Campus</span>
           </div>
         </a>
         <a href="coffee/breville.html" class="category-card" data-category="coffee">
           <img src="images/brevilleb4.png" alt="Breville Coffee Machine" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title">Breville Coffee Machine</h3>
+            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Breville Coffee Machine</h3>
             <p class="card-desc">Enjoy premium coffee from our new Breville machine, available for all employees in the lounge.</p>
-            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 5, Floor 4</span>
+            <span class="tag-green">Building 5, Floor 4</span>
+  <span class="tag-blue left">East Campus</span>
           </div>
         </a>
       <!-- Wellness -->
           <a href="wellness/naproom.html" class="category-card" data-category="wellness">
             <img src="images/naproomb16.png" alt="Nap Room" class="card-img" />
             <div class="card-content">
-              <h3 class="card-title">Nap Room</h3>
+              <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Nap Room</h3>
               <p class="card-desc">Recharge in our quiet nap room, designed for short breaks and relaxation during your workday.</p>
-              <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 16, Floor 2</span>
-            </div>
+              <span class="tag-green">Building 16, Floor 2</span>
+  <span class="tag-blue left">East Campus</span>
+      </div>
           </a>
       </a>
       <!-- Movement -->
       <a href="movement/soccer.html" class="category-card" data-category="movement">
         <img src="images/minigolfb7.png" alt="Mini Golf" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Mini Golf</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Mini Golf</h3>
           <p class="card-desc">Play a round of mini golf on campus! Challenge friends or enjoy a relaxing break with a putter and colorful obstacles.</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 7, Floor 2</span>
-        </div>
+          <span class="tag-green">Building 7, Floor 2</span>
+  <span class="tag-blue left">East Campus</span>
+  </div>
       </a>
         <a href="movement/basketball.html" class="category-card" data-category="movement">
           <img src="images/basketballb92.jpg" alt="Basketball Court" class="card-img" />
           <div class="card-content">
-            <h3 class="card-title">Basketball Court</h3>
+            <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Basketball Court</h3>
             <p class="card-desc">Shoot hoops and play basketball with friends. The court is open for casual games and team matches.</p>
-            <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 92, Floor 1</span>
+            <span class="tag-green">Building 92, Floor 1</span>
+  <span class="tag-blue left">Central Campus</span>
           </div>
         </a>
       <!-- Learn Something -->
       <a href="learn/library.html" class="category-card" data-category="learn">
   <img src="images/libraryb7.png" alt="Library" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Library</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Library</h3>
           <p class="card-desc">Visit the campus library to read, study, or borrow books and resources for personal and professional growth.</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 7, Floor 2</span>
-        </div>
+          <span class="tag-green">Building 7</span>
+  <span class="tag-blue left">East Campus</span>
+  </div>
       </a>
       <!-- Explore Campus -->
   <a href="funmeetingspaces/speakeasy.html" class="category-card" data-category="funmeetingspaces">
   <img src="images/speakeasyb40.png" alt="Speakeasy / Secret Room" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Speakeasy / Secret Room</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Speakeasy / Secret Room</h3>
           <p class="card-desc">Discover the hidden speakeasy on campus—a secret room for quiet meetings, creative sessions, or just a fun surprise.</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 40, Floor 3</span>
-        </div>
+          <span class="tag-green">Building 40, Floor 3</span>
+  <span style="display:inline-block;background:#eaf2fb;color:#2563eb;font-weight:500;padding:6px 14px;border-radius:14px;font-size:0.92rem;margin-bottom:8px;width:fit-content;min-width:0;margin-left:8px;">West Campus</span>
+  </div>
       </a>
       <!-- Explore Campus: Acoustic Panel Wall -->
       <a href="explore/acousticpanel.html" class="category-card" data-category="explore">
   <img src="images/acousticpanelwallb40.png" alt="Acoustic Panel Wall" class="card-img" />
         <div class="card-content">
-          <h3 class="card-title">Acoustic Panel Wall</h3>
+          <h3 class="card-title" style="margin-bottom:0;padding-bottom:0;">Acoustic Panel Wall</h3>
           <p class="card-desc">Experience the innovative acoustic panel wall in Building 40.</p>
-          <span style="display:inline-block;background:#e6f7ee;color:#38b2ac;font-weight:500;padding:6px 14px;border-radius:14px;font-size:1rem;margin-bottom:8px;width:fit-content;min-width:0;">Building 40, Floor 3</span>
-        </div>
+          <span class="tag-green">Building 40, Floor 3</span>
+  <span class="tag-blue left">West Campus</span>
+  </div>
       </a>
     </div>
     </main>

@@ -26,22 +26,18 @@
   </style>
 </head>
 <body>
-  <div class="quiz-question-title" id="question-title-0">Which building(s) are you in?</div>
+  <div class="quiz-question-title" id="question-title-0">What campus would you like to explore?</div>
   <div class="quiz-question-title" id="question-title-1" style="display:none;">Pick a vibe:</div>
   <div class="quiz-container">
     <form id="quiz-form">
       <div id="step-0" class="quiz-step">
         <div class="quiz-options">
-          <label><input type="checkbox" name="building" value="4"> 4</label>
-          <label><input type="checkbox" name="building" value="5"> 5</label>
-          <label><input type="checkbox" name="building" value="7"> 7</label>
-          <label><input type="checkbox" name="building" value="16"> 16</label>
-          <label><input type="checkbox" name="building" value="28"> 28</label>
-          <label><input type="checkbox" name="building" value="31"> 31</label>
-          <label><input type="checkbox" name="building" value="40"> 40</label>
-          <label><input type="checkbox" name="building" value="92"> 92</label>
+          <label><input type="checkbox" name="area" value="East Campus"> East Campus</label>
+          <label><input type="checkbox" name="area" value="West Campus"> West Campus</label>
+          <label><input type="checkbox" name="area" value="North Campus"> North Campus</label>
+          <label><input type="checkbox" name="area" value="RedWest Campus"> RedWest Campus</label>
           <div style="height:16px;"></div>
-          <label><input type="checkbox" name="building" value="any"> Any</label>
+          <label><input type="checkbox" name="area" value="Any Campus"> Any Campus</label>
         </div>
         <button type="button" class="quiz-btn" id="next-0">Next →</button>
       </div>
@@ -53,28 +49,28 @@
           <div style="height:16px;"></div>
           <label><input type="radio" name="vibe" value="surprise"> Surprise me!</label>
         </div>
-        <button type="button" class="quiz-btn" id="back-1" style="background:#e0e7ef;color:#7fdbff;margin-right:8px;">← Back</button>
+  <button type="button" class="quiz-btn" id="back-1" style="background:#e0e7ef;color:#111;margin-right:8px;">← Back</button>
         <button type="submit" class="quiz-btn">Show me an activity!</button>
       </div>
     </form>
     <div id="quiz-result" class="quiz-result" style="display:none;"></div>
   </div>
   <script>
-    // Disable other building checkboxes if 'Any' is selected
-    function updateBuildingCheckboxes() {
-      const anyCheckbox = document.querySelector('input[name="building"][value="any"]');
-      const buildingCheckboxes = Array.from(document.querySelectorAll('input[name="building"]')).filter(cb => cb.value !== 'any');
-      if (anyCheckbox.checked) {
-        buildingCheckboxes.forEach(cb => { cb.disabled = true; });
+    // Disable other campus checkboxes if 'Any Campus' is selected
+    function updateCampusCheckboxes() {
+      const anyCampus = document.querySelector('input[name="area"][value="Any Campus"]');
+      const campusCheckboxes = Array.from(document.querySelectorAll('input[name="area"]')).filter(cb => cb.value !== 'Any Campus');
+      if (anyCampus.checked) {
+        campusCheckboxes.forEach(cb => { cb.disabled = true; });
       } else {
-        buildingCheckboxes.forEach(cb => { cb.disabled = false; });
+        campusCheckboxes.forEach(cb => { cb.disabled = false; });
       }
     }
-    document.querySelectorAll('input[name="building"]').forEach(cb => {
-      cb.addEventListener('change', updateBuildingCheckboxes);
+    document.querySelectorAll('input[name="area"]').forEach(cb => {
+      cb.addEventListener('change', updateCampusCheckboxes);
     });
     // Initial state
-    updateBuildingCheckboxes();
+    updateCampusCheckboxes();
     const activities = [
   { name: 'Karaoke Lounge', category: 'music', building: '5', vibe: 'social', link: 'music/karaoke.html' },
   { name: 'XBox Lounge', category: 'games', building: '4', vibe: 'active', link: 'games/xbox.html' },
@@ -101,11 +97,20 @@
 
     document.getElementById('quiz-form').onsubmit = function(e) {
       e.preventDefault();
-      const buildings = Array.from(document.querySelectorAll('input[name="building"]:checked')).map(cb => cb.value);
+      const areas = Array.from(document.querySelectorAll('input[name="area"]:checked')).map(cb => cb.value);
       const vibe = document.querySelector('input[name="vibe"]:checked')?.value;
       let filtered = activities;
-      if (buildings.length && !buildings.includes('any')) {
-        filtered = filtered.filter(a => buildings.includes(a.building));
+      if (areas.length && areas.includes('Any Campus')) {
+        // Legacy logic: include all activities if Any Campus is selected
+        filtered = activities;
+      } else if (areas.length) {
+        filtered = filtered.filter(a => {
+          if (areas.includes('East Campus')) return ['1','2','3','4','5','16','17','20','25','31','34','37'].includes(a.building);
+          if (areas.includes('West Campus')) return ['92','99','120','121','122','123','124','125','126','127'].includes(a.building);
+          if (areas.includes('North Campus')) return ['127N','121N','122N','123N','124N','125N','126N'].includes(a.building);
+          if (areas.includes('RedWest Campus')) return ['RedWestA','RedWestB','RedWestC','RedWestD','RedWestE','RedWestF','88'].includes(a.building);
+          return false;
+        });
       }
       if (vibe) filtered = filtered.filter(a => a.vibe === vibe || vibe === 'surprise');
       if (filtered.length) {

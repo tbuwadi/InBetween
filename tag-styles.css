@@ -1,0 +1,42 @@
+:root {
+  --tag-bg-green: #e6f7ee;
+  --tag-bg-blue: #eaf2fb;
+  --tag-color-green: #38b2ac;
+  --tag-color-blue: #2563eb;
+  --tag-font-size: 0.92rem;
+  --tag-font-weight: 500;
+  --tag-padding: 6px 14px;
+  --tag-radius: 14px;
+  --tag-margin-bottom: 8px;
+  --tag-width: fit-content;
+  --tag-min-width: 0;
+  --tag-margin-left: 8px;
+}
+.tag-green {
+  display: inline-block;
+  background: var(--tag-bg-green);
+  color: var(--tag-color-green);
+  font-weight: var(--tag-font-weight);
+  padding: var(--tag-padding);
+  border-radius: var(--tag-radius);
+  font-size: var(--tag-font-size);
+  margin-bottom: var(--tag-margin-bottom);
+  margin-top: 6px;
+  width: var(--tag-width);
+  min-width: var(--tag-min-width);
+}
+.tag-blue {
+  display: inline-block;
+  background: var(--tag-bg-blue);
+  color: var(--tag-color-blue);
+  font-weight: var(--tag-font-weight);
+  padding: var(--tag-padding);
+  border-radius: var(--tag-radius);
+  font-size: var(--tag-font-size);
+  margin-bottom: var(--tag-margin-bottom);
+  width: var(--tag-width);
+  min-width: var(--tag-min-width);
+}
+.tag-blue.left {
+  margin-left: var(--tag-margin-left);
+}

@@ -1,0 +1,21 @@
+.sidebar-quiz-btn {
+  display: block;
+  margin-bottom: 18px;
+  margin-top: 8px;
+  padding: 7px 14px;
+  border: 1.5px solid #e0e7ef;
+  border-radius: 12px;
+  background: #fff;
+  color: #222;
+  font-size: 1.08rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px 0 #e0e7ef1a;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+.sidebar-quiz-btn:hover {
+  box-shadow: 0 4px 16px 0 #38b2ac1a;
+  border-color: #38b2ac;
+  color: #38b2ac;
+}
