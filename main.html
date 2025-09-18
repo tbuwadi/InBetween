@@ -1,103 +1,8 @@
     </main>
 </div>
 <script>
-  const buildingCoords = {
-  '1': {lat: 47.643543, lng: -122.130821},
-  '2': {lat: 47.6436, lng: -122.1309},
-  '3': {lat: 47.6437, lng: -122.131},
-  '4': {lat: 47.6438, lng: -122.1311},
-  '5': {lat: 47.64, lng: -122.13},
-  '6': {lat: 47.6405, lng: -122.1295},
-  '7': {lat: 47.643543, lng: -122.130821},
-  '8': {lat: 47.6415, lng: -122.1287},
-  '9': {lat: 47.6415, lng: -122.1287},
-  '10': {lat: 47.6413, lng: -122.1283},
-  '16': {lat: 47.644, lng: -122.1313},
-  '17': {lat: 47.6441, lng: -122.1314},
-  '20': {lat: 47.6412, lng: -122.1281},
-  '25': {lat: 47.6411, lng: -122.1279},
-  '30': {lat: 47.641, lng: -122.1277},
-  '31': {lat: 47.6444, lng: -122.1317},
-  '33': {lat: 47.6409, lng: -122.1275},
-  '34': {lat: 47.6408, lng: -122.1273},
-  '36': {lat: 47.6407, lng: -122.1271},
-  '37': {lat: 47.6446, lng: -122.1319},
-  '40': {lat: 47.643543, lng: -122.130821},
-  '41': {lat: 42.0909, lng: -118.5111},
-  '42': {lat: 47.6371, lng: -122.1237},
-  '43': {lat: 47.6415, lng: -122.1275},
-  '44': {lat: 47.642, lng: -122.127},
-  '114': {lat: 47.6401, lng: -122.1259},
-  '115': {lat: 47.6401, lng: -122.1259},
-  '120': {lat: 47.64, lng: -122.1257},
-  '121': {lat: 47.64, lng: -122.1257},
-  '122': {lat: 47.64, lng: -122.1257},
-  '123': {lat: 47.64, lng: -122.1257},
-  '124': {lat: 47.64, lng: -122.1257},
-  '125': {lat: 47.64, lng: -122.1257},
-  '126': {lat: 47.64, lng: -122.1257},
-  '127': {lat: 47.64, lng: -122.1257},
-  'RedWestA': {lat: 47.6398, lng: -122.1253},
-  'RedWestB': {lat: 47.6398, lng: -122.1253},
-  'RedWestC': {lat: 47.6398, lng: -122.1253},
-  'RedWestD': {lat: 47.6398, lng: -122.1253},
-  'RedWestE': {lat: 47.6398, lng: -122.1253},
-  'RedWestF': {lat: 47.6398, lng: -122.1253},
-  'OneEsterra': {lat: 47.6397, lng: -122.1251},
-    // East Campus
-    '1': {lat: 47.643543, lng: -122.130821},
-    '2': {lat: 47.6436, lng: -122.1309},
-    '3': {lat: 47.6437, lng: -122.131},
-    '4': {lat: 47.6438, lng: -122.1311},
-    '5': {lat: 47.6439, lng: -122.1312},
-    '16': {lat: 47.644, lng: -122.1313},
-    '17': {lat: 47.6441, lng: -122.1314},
-    '20': {lat: 47.6442, lng: -122.1315},
-    '25': {lat: 47.6443, lng: -122.1316},
-    '31': {lat: 47.6444, lng: -122.1317},
-    '34': {lat: 47.6445, lng: -122.1318},
-    '37': {lat: 47.6446, lng: -122.1319},
-    'OneEsterra': {lat: 47.6447, lng: -122.132},
-
-    // West Campus
-    '92': {lat: 47.642232, lng: -122.136791},
-    '99': {lat: 47.6423, lng: -122.1369},
-    '120': {lat: 47.6424, lng: -122.137},
-    '121': {lat: 47.6425, lng: -122.1371},
-    '122': {lat: 47.6426, lng: -122.1372},
-    '123': {lat: 47.6427, lng: -122.1373},
-    '124': {lat: 47.6428, lng: -122.1374},
-    '125': {lat: 47.6429, lng: -122.1375},
-    '126': {lat: 47.643, lng: -122.1376},
-    '127': {lat: 47.6431, lng: -122.1377},
-    'StudiosA': {lat: 47.6432, lng: -122.1378},
-    'StudiosB': {lat: 47.6432, lng: -122.1378},
-    'StudiosC': {lat: 47.6432, lng: -122.1378},
-    'StudiosD': {lat: 47.6432, lng: -122.1378},
-    'StudiosE': {lat: 47.6432, lng: -122.1378},
-    'StudiosF': {lat: 47.6432, lng: -122.1378},
-    'StudiosG': {lat: 47.6432, lng: -122.1378},
-    'StudiosH': {lat: 47.6432, lng: -122.1378},
-    'TheCommons': {lat: 47.6433, lng: -122.1379},
-
-    // North Campus
-    '127N': {lat: 47.645, lng: -122.138},
-    '121N': {lat: 47.6451, lng: -122.1381},
-    '122N': {lat: 47.6452, lng: -122.1382},
-    '123N': {lat: 47.6453, lng: -122.1383},
-    '124N': {lat: 47.6454, lng: -122.1384},
-    '125N': {lat: 47.6455, lng: -122.1385},
-    '126N': {lat: 47.6456, lng: -122.1386},
-
-    // RedWest Campus
-    'RedWestB': {lat: 47.64, lng: -122.14},
-    '88': {lat: 47.6401, lng: -122.1401},
-
-    // Special Facilities
-    'MicrosoftHQ': {lat: 47.643543, lng: -122.130821},
-    '33': {lat: 47.6434, lng: -122.1325}, // Microsoft Conference Center
-    'Treehouses': {lat: 47.642887, lng: -122.121506}
-  };
+  // Building coordinates are now imported from js/buildingData.js
+  // The buildingCoords object is available globally
 
   function haversineDistance(lat1, lng1, lat2, lng2) {
     function toRad(x) { return x * Math.PI / 180; }
@@ -308,6 +213,9 @@
   <link rel="stylesheet" href="styles/tag-styles.css">
   <link rel="stylesheet" href="styles/sidebar-styles.css">
   <link rel="stylesheet" href="tag-styles.css">
+  
+  <!-- Include building data -->
+  <script src="js/buildingData.js"></script>
 
 </head>
 <body>
