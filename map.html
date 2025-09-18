@@ -1,0 +1,1584 @@
+<!DOCTYPE html><!DOCTYPE html><!DOCTYPE html><!DOCTYPE html>
+
+<html lang="en">
+
+<head><html lang="en">
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><head><html lang="en"><html lang="en">
+
+  <title>Campus Map - In Between</title>
+
+  <link rel="stylesheet" href="styles/style.css">  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="styles/sidebar-styles.css">
+
+  <style>  <meta name="viewport" content="width=device-width, initial-scale=1.0"><head><head>
+
+    .map-container {
+
+      width: 100%;  <title>Campus Map - In Between</title>
+
+      height: 600px;
+
+      background-color: #f0f4f8;  <link rel="stylesheet" href="styles/style.css">  <meta charset="UTF-8">  <meta charset="UTF-8">
+
+      border-radius: 12px;
+
+      overflow: hidden;  <link rel="stylesheet" href="styles/sidebar-styles.css">
+
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      margin-bottom: 30px;  <style>  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    }
+
+    .map-container {
+
+    .campus-filter {
+
+      margin-bottom: 20px;      height: 600px;  <title>Campus Map - In Between</title>  <title>Campus Map - In Between</title>
+
+      display: flex;
+
+      flex-wrap: wrap;      width: 100%;
+
+      gap: 10px;
+
+    }      border-radius: 12px;  <link rel="stylesheet" href="styles/style.css">  <link rel="stylesheet" href="styles/style.css">
+
+
+
+    .filter-btn {      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      background-color: #f0f4f8;
+
+      border: 1px solid #cbd5e0;      overflow: hidden;  <link rel="stylesheet" href="styles/sidebar-styles.css">  <link rel="stylesheet" href="styles/sidebar-styles.css">
+
+      color: #4a5568;
+
+      padding: 8px 16px;      margin: 20px 0;
+
+      border-radius: 8px;
+
+      cursor: pointer;    }  <style>  <style>
+
+      font-weight: 500;
+
+      transition: all 0.2s ease;    
+
+    }
+
+    .map-controls {    .map-container {    .map-container {
+
+    .filter-btn:hover {
+
+      background-color: #e2e8f0;      display: flex;
+
+    }
+
+      align-items: center;      height: 600px;      height: 1200px;
+
+    .filter-btn.active {
+
+      background-color: #38b2ac;      gap: 20px;
+
+      color: white;
+
+      border-color: #38b2ac;      margin-bottom: 20px;      width: 100%;      width: 100%;
+
+    }
+
+      padding: 20px;
+
+    .building-list {
+
+      display: grid;      background: #f8fafc;      border-radius: 12px;      border-radius: 12px;
+
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+      gap: 15px;      border-radius: 12px;
+
+      margin-top: 20px;
+
+    }      border: 1px solid #e2e8f0;      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+
+
+    .building-card {    }
+
+      background: white;
+
+      border-radius: 8px;          overflow: hidden;      overflow: hidden;
+
+      padding: 15px;
+
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);    .map-controls label {
+
+      border: 1px solid #e2e8f0;
+
+      transition: transform 0.2s, box-shadow 0.2s;      font-weight: 500;      margin: 20px 0;      margin: 20px 0;
+
+    }
+
+      color: #2d3748;
+
+    .building-card:hover {
+
+      transform: translateY(-2px);      display: flex;    }    }
+
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    }      align-items: center;
+
+
+
+    .building-name {      gap: 8px;        
+
+      font-weight: 600;
+
+      color: #2d3748;    }
+
+      margin-bottom: 5px;
+
+    }        .map-controls {    .map-controls {
+
+
+
+    .building-details {    .map-controls select {
+
+      color: #718096;
+
+      font-size: 0.9rem;      padding: 8px 16px;      display: flex;      display: flex;
+
+    }
+
+      border: 1px solid #e2e8f0;
+
+    .map-placeholder {
+
+      height: 100%;      border-radius: 8px;      align-items: center;      align-items: center;
+
+      display: flex;
+
+      align-items: center;      font-size: 14px;
+
+      justify-content: center;
+
+      background-color: #e2e8f0;      background: white;      gap: 20px;      gap: 20px;
+
+      color: #4a5568;
+
+      font-weight: 500;      color: #2d3748;
+
+    }
+
+  </style>    }      margin-bottom: 20px;      margin-bottom: 20px;
+
+</head>
+
+<body>    
+
+  <div class="main-layout">
+
+    <aside class="sidebar">    .map-legend {      padding: 20px;      padding: 20px;
+
+      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>
+
+      <h2>Navigation</h2>      display: flex;
+
+      <ul class="category-list">
+
+        <li><a href="index.html">🏠 Home</a></li>      gap: 15px;      background: #f8fafc;      background: #f8fafc;
+
+        <li><a href="main.html">📋 Activities</a></li>
+
+        <li><a href="map.html">🗺️ Campus Map</a></li>      margin: 20px 0;
+
+        <li><a href="campus-map.html">🏢 Building Directory</a></li>
+
+      </ul>      padding: 15px;      border-radius: 12px;      border-radius: 12px;
+
+    </aside>
+
+      background: #fff;
+
+    <main class="main-content">
+
+      <div class="navigation-links">      border-radius: 8px;      border: 1px solid #e2e8f0;      border: 1px solid #e2e8f0;
+
+        <a href="main.html" class="back-button">← Back to Activities</a>
+
+      </div>      border: 1px solid #e2e8f0;
+
+      
+
+      <h1>Campus <span style="color:#38b2ac;font-weight:bold;">Map</span></h1>      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);    }    }
+
+      <p style="color: #4a5568; margin-bottom: 30px;">
+
+        Explore different campus areas and find building locations.    }
+
+      </p>
+
+                  
+
+      <div class="campus-filter">
+
+        <button class="filter-btn active" data-campus="all">All Campuses</button>    .legend-item {
+
+        <button class="filter-btn" data-campus="east">East Campus</button>
+
+        <button class="filter-btn" data-campus="west">West Campus</button>      display: flex;    .map-controls label {    .map-controls label {
+
+        <button class="filter-btn" data-campus="north">North Campus</button>
+
+        <button class="filter-btn" data-campus="redwest">RedWest Campus</button>      align-items: center;
+
+      </div>
+
+            gap: 8px;      font-weight: 500;      font-weight: 500;
+
+      <div class="map-container">
+
+        <div class="map-placeholder">      font-size: 14px;
+
+          Interactive map would be displayed here. This is a static placeholder.
+
+        </div>      color: #4a5568;      color: #2d3748;      color: #2d3748;
+
+      </div>
+
+          }
+
+      <h2>Building Directory</h2>
+
+      <div class="building-list" id="building-list">          display: flex;      display: flex;
+
+        <!-- Buildings will be populated here via JavaScript -->
+
+      </div>    .legend-color {
+
+    </main>
+
+  </div>      width: 16px;      align-items: center;      align-items: center;
+
+  
+
+  <script>      height: 16px;
+
+    // Sample building data - in a real app, this would be loaded from a database or API
+
+    const buildings = [      border-radius: 50%;      gap: 8px;      gap: 8px;
+
+      { id: "1", name: "Building 1", campus: "east", latitude: 47.642, longitude: -122.131 },
+
+      { id: "4", name: "Building 4", campus: "east", latitude: 47.643, longitude: -122.130 },      border: 2px solid white;
+
+      { id: "5", name: "Building 5", campus: "east", latitude: 47.642, longitude: -122.132 },
+
+      { id: "16", name: "Building 16", campus: "east", latitude: 47.644, longitude: -122.133 },      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);    }    }
+
+      { id: "25", name: "Building 25", campus: "east", latitude: 47.641, longitude: -122.129 },
+
+      { id: "31", name: "Building 31", campus: "east", latitude: 47.640, longitude: -122.128 },    }
+
+      { id: "92", name: "Building 92", campus: "west", latitude: 47.639, longitude: -122.140 },
+
+      { id: "99", name: "Building 99", campus: "west", latitude: 47.638, longitude: -122.141 },            
+
+      { id: "121", name: "Building 121", campus: "west", latitude: 47.637, longitude: -122.142 },
+
+      { id: "122", name: "Building 122", campus: "west", latitude: 47.636, longitude: -122.143 },    .building-info {
+
+      { id: "121N", name: "Building 121N", campus: "north", latitude: 47.650, longitude: -122.135 },
+
+      { id: "122N", name: "Building 122N", campus: "north", latitude: 47.651, longitude: -122.136 },      display: none;    .map-controls select {    .map-controls select {
+
+      { id: "RedWestA", name: "RedWest A", campus: "redwest", latitude: 47.660, longitude: -122.150 },
+
+      { id: "RedWestB", name: "RedWest B", campus: "redwest", latitude: 47.661, longitude: -122.151 }      padding: 15px;
+
+    ];
+
+          margin-top: 10px;      padding: 8px 16px;      padding: 8px 16px;
+
+    // Display buildings in the directory
+
+    function displayBuildings(campusFilter = 'all') {      background: #f7fafc;
+
+      const buildingList = document.getElementById('building-list');
+
+      buildingList.innerHTML = '';      border-radius: 8px;      border: 1px solid #e2e8f0;      border: 1px solid #e2e8f0;
+
+      
+
+      const filteredBuildings = campusFilter === 'all'       border-left: 4px solid #38b2ac;
+
+        ? buildings 
+
+        : buildings.filter(building => building.campus === campusFilter);    }      border-radius: 8px;      border-radius: 8px;
+
+      
+
+      filteredBuildings.forEach(building => {    
+
+        const card = document.createElement('div');
+
+        card.className = 'building-card';    .building-info h4 {      font-size: 14px;      font-size: 14px;
+
+        card.innerHTML = `
+
+          <div class="building-name">${building.name}</div>      margin: 0 0 8px 0;
+
+          <div class="building-details">Campus: ${building.campus.charAt(0).toUpperCase() + building.campus.slice(1)}</div>
+
+          <div class="building-details">ID: ${building.id}</div>      color: #2d3748;      background: white;      background: white;
+
+        `;
+
+        buildingList.appendChild(card);      font-size: 16px;
+
+      });
+
+    }    }      color: #2d3748;      color: #2d3748;
+
+    
+
+    // Initialize the page    
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Display all buildings initially    .building-info p {    }    }
+
+      displayBuildings();
+
+            margin: 0;
+
+      // Set up campus filter buttons
+
+      const filterButtons = document.querySelectorAll('.filter-btn');      color: #4a5568;        
+
+      filterButtons.forEach(button => {
+
+        button.addEventListener('click', () => {      font-size: 14px;
+
+          // Update active button
+
+          filterButtons.forEach(btn => btn.classList.remove('active'));    }    .map-legend {    .map-legend {
+
+          button.classList.add('active');
+
+            </style>
+
+          // Filter buildings
+
+          const campusFilter = button.getAttribute('data-campus');        display: flex;      display: flex;
+
+          displayBuildings(campusFilter);
+
+        });  <!-- Azure Maps SDK -->
+
+      });
+
+    });  <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">      gap: 15px;      gap: 15px;
+
+  </script>
+
+</body>  <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+</html>
+</head>      margin: 20px 0;      margin: 20px 0;
+
+<body>
+
+  <div class="main-layout">      padding: 15px;      padding: 15px;
+
+    <aside class="sidebar">
+
+      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>      background: #fff;      background: #fff;
+
+      <h2>Navigation</h2>
+
+      <ul class="category-list">      border-radius: 8px;      border-radius: 8px;
+
+        <li><a href="index.html">🏠 Home</a></li>
+
+        <li><a href="main.html">📋 Activities</a></li>      border: 1px solid #e2e8f0;      border: 1px solid #e2e8f0;
+
+        <li class="active">🗺️ Campus Map</li>
+
+        <li><a href="campus-map.html">🏢 Building Directory</a></li>      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+      </ul>
+
+      <h2>Campus Filter</h2>    }    }
+
+      <ul class="category-list">
+
+        <li id="campus-filter-all" class="active" onclick="filterByCampus('all')">📍 All Campuses</li>        
+
+        <li id="campus-filter-east" onclick="filterByCampus('East')">📍 East Campus</li>
+
+        <li id="campus-filter-west" onclick="filterByCampus('West')">📍 West Campus</li>    .legend-item {    .legend-item {
+
+        <li id="campus-filter-north" onclick="filterByCampus('North')">📍 North Campus</li>
+
+        <li id="campus-filter-redwest" onclick="filterByCampus('RedWest')">📍 RedWest Campus</li>      display: flex;      display: flex;
+
+        <li id="campus-filter-special" onclick="filterByCampus('Special')">📍 Special Facilities</li>
+
+      </ul>      align-items: center;      align-items: center;
+
+    </aside>
+
+      gap: 8px;      gap: 8px;
+
+    <main class="main-content">
+
+      <div class="navigation-links">      font-size: 14px;      font-size: 14px;
+
+        <a href="main.html" class="back-button">← Back to Activities</a>
+
+        <a href="campus-map.html" class="back-button">View Building Directory</a>      color: #4a5568;      color: #4a5568;
+
+      </div>
+
+          }    }
+
+      <h1>Campus <span style="color:#38b2ac;font-weight:bold;">Map</span></h1>
+
+      <p style="color: #4a5568; margin-bottom: 20px;">        
+
+        Explore all Microsoft campus buildings and find your way around. Click on any building marker to see more information.
+
+      </p>    .legend-color {    .legend-color {
+
+      
+
+      <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 20px;">      width: 16px;      width: 16px;
+
+        <p style="margin: 0; font-size: 14px; color: #4a5568;">
+
+          <strong>🔑 API Key Setup:</strong> To enable the interactive map, get a free Azure Maps key from       height: 16px;      height: 16px;
+
+          <a href="https://azure.microsoft.com/en-us/services/azure-maps/" target="_blank" style="color: #38b2ac;">Azure Maps</a> 
+
+          and replace <code>YOUR_AZURE_MAPS_KEY</code> in the code. The building directory below works without an API key.      border-radius: 50%;      border-radius: 50%;
+
+        </p>
+
+      </div>      border: 2px solid white;      border: 2px solid white;
+
+      
+
+      <div class="map-controls">      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+        <label>
+
+          <span>Campus:</span>    }    }
+
+          <select id="campus-filter" onchange="filterByCampus(this.value)">
+
+            <option value="all">All Campuses</option>        
+
+            <option value="East">East Campus</option>
+
+            <option value="West">West Campus</option>    .back-button {    .back-button {
+
+            <option value="North">North Campus</option>
+
+            <option value="RedWest">RedWest Campus</option>      display: inline-flex;      display: inline-flex;
+
+            <option value="Special">Special Facilities</option>
+
+          </select>      align-items: center;      align-items: center;
+
+        </label>
+
+              gap: 8px;      gap: 8px;
+
+        <label>
+
+          <span>Building Type:</span>      padding: 10px 20px;      padding: 10px 20px;
+
+          <select id="building-type-filter" onchange="filterByType(this.value)">
+
+            <option value="all">All Types</option>      background: #38b2ac;      background: #38b2ac;
+
+            <option value="office">Office Buildings</option>
+
+            <option value="amenity">Amenity Buildings</option>      color: white;      color: white;
+
+            <option value="special">Special Facilities</option>
+
+          </select>      text-decoration: none;      text-decoration: none;
+
+        </label>
+
+      </div>      border-radius: 8px;      border-radius: 8px;
+
+      
+
+      <div id="map" class="map-container"></div>      font-weight: 500;      font-weight: 500;
+
+      
+
+      <div class="info-panel">      margin-bottom: 20px;      margin-bottom: 20px;
+
+        <h3>Building Directory</h3>
+
+        <p>Click on a building in the list below to view its details.</p>      transition: background-color 0.2s;      transition: background-color 0.2s;
+
+        
+
+        <div id="building-list" style="margin-top: 20px;">    }    }
+
+          <!-- Building list will be populated here -->
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;" id="buildings-grid">        
+
+            <!-- This will be populated by JavaScript -->
+
+          </div>    .back-button:hover {    .back-button:hover {
+
+        </div>
+
+      </div>      background: #319795;      background: #319795;
+
+    </main>
+
+  </div>    }    }
+
+
+
+  <script src="js/buildingData.js"></script>        
+
+  <script>
+
+    // Wait for DOM to be ready    .info-panel {    .info-panel {
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Your Azure Maps subscription key      background: #fff;      background: #fff;
+
+      const subscriptionKey = 'YOUR_AZURE_MAPS_KEY';
+
+            border: 1px solid #e2e8f0;      border: 1px solid #e2e8f0;
+
+      // Initialize the map
+
+      let map;      border-radius: 8px;      border-radius: 8px;
+
+      try {
+
+        // Create a map instance      padding: 20px;      padding: 20px;
+
+        map = new atlas.Map('map', {
+
+          center: [-122.1379, 47.6423], // Microsoft campus center      margin-top: 20px;      margin-top: 20px;
+
+          zoom: 15,
+
+          view: 'Auto',      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+          authOptions: {
+
+            authType: 'subscriptionKey',    }    }
+
+            subscriptionKey: subscriptionKey
+
+          }        
+
+        });
+
+            .building-info {    .building-info {
+
+        // Wait until the map resources are ready
+
+        map.events.add('ready', function() {      display: none;      display: none;
+
+          // Create a data source for the building markers
+
+          let dataSource = new atlas.source.DataSource();      padding: 15px;      padding: 15px;
+
+          map.sources.add(dataSource);
+
+                margin-top: 10px;      margin-top: 10px;
+
+          // Create a symbol layer for rendering the points
+
+          let symbolLayer = new atlas.layer.SymbolLayer(dataSource, null, {      background: #f7fafc;      background: #f7fafc;
+
+            iconOptions: {
+
+              image: 'pin-round-blue',      border-radius: 8px;      border-radius: 8px;
+
+              anchor: 'center',
+
+              allowOverlap: true      border-left: 4px solid #38b2ac;      border-left: 4px solid #38b2ac;
+
+            }
+
+          });    }    }
+
+          map.layers.add(symbolLayer);
+
+                  
+
+          // Create a popup
+
+          let popup = new atlas.Popup();    .building-info h4 {    .building-info h4 {
+
+          
+
+          // Add buildings to the map      margin: 0 0 8px 0;      margin: 0 0 8px 0;
+
+          addBuildingsToMap(dataSource);
+
+                color: #2d3748;      color: #2d3748;
+
+          // Add click event to show popup on markers
+
+          map.events.add('click', symbolLayer, function(e) {      font-size: 16px;      font-size: 16px;
+
+            if (e.shapes && e.shapes.length > 0) {
+
+              let properties = e.shapes[0].getProperties();    }    }
+
+              let position = e.shapes[0].getCoordinates();
+
+                      
+
+              // Set popup content
+
+              popup.setOptions({    .building-info p {    .building-info p {
+
+                content: `
+
+                  <div style="padding: 10px;">      margin: 0;      margin: 0;
+
+                    <h3 style="margin-top: 0;">${properties.name}</h3>
+
+                    <p>Campus: ${properties.campus}</p>      color: #4a5568;      color: #4a5568;
+
+                    <p>Building ID: ${properties.id}</p>
+
+                    <p>Coordinates: ${position[1].toFixed(4)}, ${position[0].toFixed(4)}</p>      font-size: 14px;      font-size: 14px;
+
+                  </div>
+
+                `,    }    }
+
+                position: position
+
+              });  </style>  </style>
+
+              
+
+              popup.open(map);  </head>
+
+            }
+
+          });  <!-- Azure Maps SDK --><body>
+
+          
+
+          // Initial population of building list  <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">  <div class="main-layout">
+
+          populateBuildingList();
+
+        });  <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>    <aside class="sidebar">
+
+      } catch (error) {
+
+        console.error("Failed to initialize Azure Maps:", error);</head>      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>
+
+        document.getElementById('map').innerHTML = "<div style='padding: 20px; text-align: center;'><p>Map could not be loaded. Please check your Azure Maps API key.</p></div>";
+
+        populateBuildingList();<body>      <h2>Navigation</h2>
+
+      }
+
+        <div class="main-layout">      <ul class="category-list">
+
+      // Add buildings to the map
+
+      function addBuildingsToMap(dataSource) {    <aside class="sidebar">        <li><a href="index.html" style="color: inherit; text-decoration: none;">🏠 Home</a></li>
+
+        // Clear existing points
+
+        dataSource.clear();      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>        <li><a href="main.html" style="color: inherit; text-decoration: none;">📋 Activities</a></li>
+
+        
+
+        // Get filter values      <h2>Navigation</h2>        <li style="background: #f0f9ff; border-radius: 8px; padding: 8px;">🗺️ Campus Map</li>
+
+        let campusFilter = document.getElementById('campus-filter').value;
+
+        let typeFilter = document.getElementById('building-type-filter').value;      <ul class="category-list">      </ul>
+
+        
+
+        // Add building points to the data source        <li><a href="index.html" style="color: inherit; text-decoration: none;">🏠 Home</a></li>    </aside>
+
+        for (const [id, building] of Object.entries(buildingData)) {
+
+          // Check if building matches filters        <li><a href="main.html" style="color: inherit; text-decoration: none;">📋 Activities</a></li>
+
+          if ((campusFilter === 'all' || building.campus === campusFilter) &&
+
+              (typeFilter === 'all' || (typeFilter === 'special' && building.campus === 'Special'))) {        <li style="background: #f0f9ff; border-radius: 8px; padding: 8px;">🗺️ Campus Map</li>    <main class="main-content">
+
+              
+
+            let point = new atlas.data.Feature(new atlas.data.Point([building.lng, building.lat]), {        <li><a href="campus-map.html" style="color: inherit; text-decoration: none;">🏢 Building Directory</a></li>      <a href="main.html" class="back-button">
+
+              id: id,
+
+              name: building.name,      </ul>        ← Back to Activities
+
+              campus: building.campus
+
+            });    </aside>      </a>
+
+            
+
+            dataSource.add(point);      
+
+          }
+
+        }    <main class="main-content">      <h1>Campus <span style="color:#38b2ac;font-weight:bold;">Map</span></h1>
+
+      }
+
+            <a href="main.html" class="back-button">      <p style="color: #4a5568; margin-bottom: 20px;">
+
+      // Filter buildings by campus
+
+      function filterByCampus(campus) {        ← Back to Activities        Explore all Microsoft campus buildings and find your way around. Click on any building marker to see more information.
+
+        // Update the dropdown value
+
+        document.getElementById('campus-filter').value = campus;      </a>      </p>
+
+        
+
+        // Update sidebar active state            <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+
+        document.querySelectorAll('.sidebar .category-list li[id^="campus-filter-"]').forEach(li => {
+
+          li.classList.remove('active');      <h1>Campus <span style="color:#38b2ac;font-weight:bold;">Map</span></h1>        <p style="margin: 0; font-size: 14px; color: #4a5568;">
+
+        });
+
+              <p style="color: #4a5568; margin-bottom: 20px;">          <strong>🔑 API Key Setup:</strong> To enable the interactive map, get a free Azure Maps key from 
+
+        let sidebarItemId;
+
+        switch(campus) {        Explore all Microsoft campus buildings and find your way around. Click on any building marker to see more information.          <a href="https://azure.microsoft.com/en-us/services/azure-maps/" target="_blank" style="color: #38b2ac;">Azure Maps</a> 
+
+          case 'East': sidebarItemId = 'campus-filter-east'; break;
+
+          case 'West': sidebarItemId = 'campus-filter-west'; break;      </p>          and replace <code>YOUR_AZURE_MAPS_KEY</code> in the code. The building directory below works without an API key.
+
+          case 'North': sidebarItemId = 'campus-filter-north'; break;
+
+          case 'RedWest': sidebarItemId = 'campus-filter-redwest'; break;      <div style="background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 20px;">        </p>
+
+          case 'Special': sidebarItemId = 'campus-filter-special'; break;
+
+          default: sidebarItemId = 'campus-filter-all';        <p style="margin: 0; font-size: 14px; color: #4a5568;">      </div>
+
+        }
+
+                  <strong>🔑 API Key Setup:</strong> To enable the interactive map, get a free Azure Maps key from 
+
+        document.getElementById(sidebarItemId).classList.add('active');
+
+                  <a href="https://azure.microsoft.com/en-us/services/azure-maps/" target="_blank" style="color: #38b2ac;">Azure Maps</a>       <div class="map-controls">
+
+        // Update the map
+
+        if (map) {          and replace <code>YOUR_AZURE_MAPS_KEY</code> in the code. The building directory below works without an API key.        <label for="campus-filter">
+
+          let dataSource = map.sources.getById('default') || map.sources.getSources()[0];
+
+          if (dataSource) {        </p>          🏢 Filter by Campus:
+
+            addBuildingsToMap(dataSource);
+
+          }      </div>        </label>
+
+        }
+
+                      <select id="campus-filter">
+
+        // Update building list
+
+        populateBuildingList();      <div class="map-controls">          <option value="all">All Campuses</option>
+
+      }
+
+              <label>          <option value="East">East Campus</option>
+
+      // Filter buildings by type
+
+      function filterByType(type) {          <span>Campus:</span>          <option value="West">West Campus</option>
+
+        if (map) {
+
+          let dataSource = map.sources.getById('default') || map.sources.getSources()[0];          <select id="campus-filter">          <option value="North">North Campus</option>
+
+          if (dataSource) {
+
+            addBuildingsToMap(dataSource);            <option value="all">All Campuses</option>          <option value="RedWest">RedWest Campus</option>
+
+          }
+
+        }            <option value="East">East Campus</option>        </select>
+
+        
+
+        populateBuildingList();            <option value="West">West Campus</option>        
+
+      }
+
+                  <option value="North">North Campus</option>        <button id="map-style-toggle" style="padding: 8px 16px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer; margin-right: 10px;">
+
+      // Populate the building list beneath the map
+
+      function populateBuildingList() {            <option value="RedWest">RedWest Campus</option>          �️ Switch to Road View
+
+        const buildingsGrid = document.getElementById('buildings-grid');
+
+        buildingsGrid.innerHTML = '';            <option value="Special">Special Facilities</option>        </button>
+
+        
+
+        let campusFilter = document.getElementById('campus-filter').value;          </select>        
+
+        let typeFilter = document.getElementById('building-type-filter').value;
+
+                </label>        <button id="center-map" style="padding: 8px 16px; background: #38b2ac; color: white; border: none; border-radius: 8px; cursor: pointer;">
+
+        // Group buildings by campus
+
+        const campuses = {};                  🎯 Center Map
+
+        
+
+        for (const [id, building] of Object.entries(buildingData)) {        <label>        </button>
+
+          // Apply filters
+
+          if ((campusFilter === 'all' || building.campus === campusFilter) &&          <span>Building Type:</span>      </div>
+
+              (typeFilter === 'all' || (typeFilter === 'special' && building.campus === 'Special'))) {
+
+                      <select id="building-type-filter">
+
+            if (!campuses[building.campus]) {
+
+              campuses[building.campus] = [];            <option value="all">All Types</option>      <div class="map-legend">
+
+            }
+
+                        <option value="office">Office Buildings</option>        <div class="legend-item">
+
+            campuses[building.campus].push({
+
+              id,            <option value="amenity">Amenity Buildings</option>          <div class="legend-color" style="background-color: #3B82F6;"></div>
+
+              ...building
+
+            });            <option value="special">Special Facilities</option>          <span>East Campus</span>
+
+          }
+
+        }          </select>        </div>
+
+        
+
+        // Add buildings to the grid        </label>        <div class="legend-item">
+
+        for (const campus in campuses) {
+
+          // Add campus header      </div>          <div class="legend-color" style="background-color: #10B981;"></div>
+
+          const campusHeader = document.createElement('div');
+
+          campusHeader.style.gridColumn = '1 / -1';                <span>West Campus</span>
+
+          campusHeader.innerHTML = `<h3 style="margin-top: 15px; color: #2d3748; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">${campus} Campus</h3>`;
+
+          buildingsGrid.appendChild(campusHeader);      <div id="map" class="map-container"></div>        </div>
+
+          
+
+          // Sort buildings by name              <div class="legend-item">
+
+          campuses[campus].sort((a, b) => a.name.localeCompare(b.name));
+
+                <div class="info-panel">          <div class="legend-color" style="background-color: #F59E0B;"></div>
+
+          // Add buildings for this campus
+
+          for (const building of campuses[campus]) {        <h3>Building Directory</h3>          <span>North Campus</span>
+
+            const buildingCard = document.createElement('div');
+
+            buildingCard.className = 'building-card';        <p>Click on a building in the list below to view its details.</p>        </div>
+
+            buildingCard.style.cssText = `
+
+              padding: 15px;                <div class="legend-item">
+
+              border-radius: 8px;
+
+              background: white;        <div id="building-list" style="margin-top: 20px;">          <div class="legend-color" style="background-color: #EF4444;"></div>
+
+              border: 1px solid #e2e8f0;
+
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);          <!-- Building list will be populated here -->          <span>RedWest Campus</span>
+
+              transition: transform 0.2s, box-shadow 0.2s;
+
+              cursor: pointer;          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;" id="buildings-grid">        </div>
+
+            `;
+
+                        <!-- This will be populated by JavaScript -->        <div class="legend-item">
+
+            buildingCard.innerHTML = `
+
+              <h4 style="margin-top: 0; color: #38b2ac;">${building.name}</h4>          </div>          <div class="legend-color" style="background-color: #8B5CF6;"></div>
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Building ID: ${building.id}</p>
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Campus: ${building.campus}</p>        </div>          <span>Special Facilities</span>
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>
+
+            `;      </div>        </div>
+
+            
+
+            // Add hover effect    </main>      </div>
+
+            buildingCard.addEventListener('mouseenter', function() {
+
+              this.style.transform = 'translateY(-3px)';  </div>
+
+              this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+
+            });      <div id="map" class="map-container"></div>
+
+            
+
+            buildingCard.addEventListener('mouseleave', function() {  <script src="js/buildingData.js"></script>
+
+              this.style.transform = 'translateY(0)';
+
+              this.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';  <script>      <div class="info-panel">
+
+            });
+
+                // Wait for DOM to be ready        <h3>Building Information</h3>
+
+            // Add click event to center map on building
+
+            buildingCard.addEventListener('click', function() {    document.addEventListener('DOMContentLoaded', function() {        <p>Click on any building marker to see detailed information about that location.</p>
+
+              if (map) {
+
+                try {      // Your Azure Maps subscription key        <div id="building-info" class="building-info">
+
+                  map.setCamera({
+
+                    center: [building.lng, building.lat],      const subscriptionKey = 'YOUR_AZURE_MAPS_KEY';          <h4 id="building-name"></h4>
+
+                    zoom: 18
+
+                  });                <p id="building-details"></p>
+
+                  
+
+                  // Show popup for the building      // Initialize the map        </div>
+
+                  let popup = new atlas.Popup({
+
+                    content: `      let map;      </div>
+
+                      <div style="padding: 10px;">
+
+                        <h3 style="margin-top: 0;">${building.name}</h3>      try {    </main>
+
+                        <p>Campus: ${building.campus}</p>
+
+                        <p>Building ID: ${building.id}</p>        // Create a map instance  </div>
+
+                        <p>Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>
+
+                      </div>        map = new atlas.Map('map', {
+
+                    `,
+
+                    position: [building.lng, building.lat]          center: [-122.1379, 47.6423], // Microsoft campus center  <script src="js/buildingData.js"></script>
+
+                  });
+
+                            zoom: 15,  <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" type="text/css" />
+
+                  popup.open(map);
+
+                } catch (error) {          view: 'Auto',  <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+
+                  console.error("Error centering map:", error);
+
+                }          authOptions: {  <script>
+
+              }
+
+            });            authType: 'subscriptionKey',    let map;
+
+            
+
+            buildingsGrid.appendChild(buildingCard);            subscriptionKey: subscriptionKey    let datasource;
+
+          }
+
+        }          }    let popup;
+
+      }
+
+    });        });
+
+  </script>
+
+</body>            // Campus color mapping
+
+</html>
+        // Wait until the map resources are ready    const campusColors = {
+
+        map.events.add('ready', function() {      'East': '#3B82F6',
+
+          // Create a data source for the building markers      'West': '#10B981',
+
+          let dataSource = new atlas.source.DataSource();      'North': '#F59E0B',
+
+          map.sources.add(dataSource);      'RedWest': '#EF4444',
+
+                'Remote': '#8B5CF6'
+
+          // Create a symbol layer for rendering the points    };
+
+          let symbolLayer = new atlas.layer.SymbolLayer(dataSource, null, {
+
+            iconOptions: {    function initMap() {
+
+              image: 'pin-round-blue',      try {
+
+              anchor: 'center',        // Initialize Azure Maps
+
+              allowOverlap: true        map = new atlas.Map('map', {
+
+            }          center: [-122.1379, 47.6423],
+
+          });          zoom: 15,
+
+          map.layers.add(symbolLayer);          view: 'Auto',
+
+                    
+
+          // Create a popup          // Add authentication details for Azure Maps
+
+          let popup = new atlas.Popup();          // You can get a free key from: https://azure.microsoft.com/en-us/services/azure-maps/
+
+                    authOptions: {
+
+          // Add buildings to the map            authType: 'subscriptionKey',
+
+          for (const [id, building] of Object.entries(buildingData)) {            subscriptionKey: 'API_KEY' // Replace with your Azure Maps key
+
+            // Create a point feature for the building            // For development/demo purposes, you can also use anonymous authentication:
+
+            let point = new atlas.data.Feature(new atlas.data.Point([building.lng, building.lat]), {            // authType: 'anonymous',
+
+              id: id,            // clientId: 'YOUR_CLIENT_ID'
+
+              name: building.name,          },
+
+              campus: building.campus          
+
+            });          style: 'satellite_road_labels'
+
+                    });
+
+            dataSource.add(point);
+
+          }        // Wait for the map to be ready
+
+                  map.events.add('ready', () => {
+
+          // Add click event to show popup on markers          // Create data source for markers
+
+          map.events.add('click', symbolLayer, function(e) {          datasource = new atlas.source.DataSource();
+
+            if (e.shapes && e.shapes.length > 0) {          map.sources.add(datasource);
+
+              let properties = e.shapes[0].getProperties();
+
+              let position = e.shapes[0].getCoordinates();          // Create a popup
+
+                        popup = new atlas.Popup({
+
+              // Set popup content            pixelOffset: [0, -18],
+
+              popup.setOptions({            closeButton: false
+
+                content: `          });
+
+                  <div style="padding: 10px;">
+
+                    <h3 style="margin-top: 0;">${properties.name}</h3>          // Create layers function to be reusable
+
+                    <p>Campus: ${properties.campus}</p>          window.createMapLayers = function() {
+
+                    <p>Building ID: ${properties.id}</p>            // Remove existing layers if they exist
+
+                    <p>Coordinates: ${position[1].toFixed(4)}, ${position[0].toFixed(4)}</p>            try {
+
+                  </div>              map.layers.remove('building-markers');
+
+                `,              map.layers.remove('building-labels');
+
+                position: position            } catch (e) {
+
+              });              // Layers don't exist yet
+
+                          }
+
+              popup.open(map);
+
+            }            // Add bubble layer for markers
+
+          });            const bubbleLayer = new atlas.layer.BubbleLayer(datasource, 'building-markers', {
+
+                        radius: 15,
+
+          // Filter control for campus selection              strokeColor: 'white',
+
+          document.getElementById('campus-filter').addEventListener('change', function() {              strokeWidth: 3,
+
+            filterBuildings();              color: ['get', 'color'],
+
+          });              opacity: 0.8
+
+                      });
+
+          // Filter control for building type            map.layers.add(bubbleLayer);
+
+          document.getElementById('building-type-filter').addEventListener('change', function() {
+
+            filterBuildings();            // Add symbol layer for labels
+
+          });            const symbolLayer = new atlas.layer.SymbolLayer(datasource, 'building-labels', {
+
+                        textOptions: {
+
+          // Initial population of building list                textField: ['get', 'name'],
+
+          populateBuildingList();                font: ['StandardFont-Bold'],
+
+                          size: 10,
+
+          // Function to filter buildings                color: 'white',
+
+          function filterBuildings() {                haloColor: 'black',
+
+            let campusFilter = document.getElementById('campus-filter').value;                haloWidth: 1,
+
+            let typeFilter = document.getElementById('building-type-filter').value;                offset: [0, 1.5]
+
+                          }
+
+            // Filter the data source            });
+
+            dataSource.clear();            map.layers.add(symbolLayer);
+
+                      };
+
+            for (const [id, building] of Object.entries(buildingData)) {
+
+              // Check if building matches filters          // Create initial layers
+
+              if ((campusFilter === 'all' || building.campus === campusFilter) &&          createMapLayers();
+
+                  (typeFilter === 'all' || (typeFilter === 'special' && building.campus === 'Special'))) {
+
+                          // Add click event for markers - moved here to ensure layers exist
+
+                let point = new atlas.data.Feature(new atlas.data.Point([building.lng, building.lat]), {          map.events.add('click', 'building-markers', (e) => {
+
+                  id: id,            if (e.shapes && e.shapes.length > 0) {
+
+                  name: building.name,              const properties = e.shapes[0].getProperties();
+
+                  campus: building.campus              
+
+                });              // Find the building data
+
+                              const building = buildingData[properties.buildingId];
+
+                dataSource.add(point);              if (building) {
+
+              }                // Show popup
+
+            }                popup.setOptions({
+
+                              content: `
+
+            // Update building list                    <div style="padding: 15px; max-width: 250px;">
+
+            populateBuildingList();                      <h4 style="margin: 0 0 10px 0; color: #2d3748;">${building.name}</h4>
+
+          }                      <p style="margin: 0 0 10px 0; color: #4a5568; font-size: 14px;">
+
+        });                        <strong>Campus:</strong> ${building.campus}<br>
+
+      } catch (error) {                        <strong>Coordinates:</strong> ${building.lat.toFixed(6)}, ${building.lng.toFixed(6)}
+
+        console.error("Failed to initialize Azure Maps:", error);                      </p>
+
+        document.getElementById('map').innerHTML = "<div style='padding: 20px; text-align: center;'><p>Map could not be loaded. Please check your Azure Maps API key.</p></div>";                      <a href="main.html" style="color: #38b2ac; text-decoration: none; font-weight: 500;">
+
+        populateFallbackBuildingList();                        View Activities →
+
+      }                      </a>
+
+                          </div>
+
+      // Populate the building list beneath the map                  `,
+
+      function populateBuildingList() {                  position: e.position
+
+        const buildingsGrid = document.getElementById('buildings-grid');                });
+
+        buildingsGrid.innerHTML = '';                
+
+                        popup.open(map);
+
+        let campusFilter = document.getElementById('campus-filter').value;                
+
+        let typeFilter = document.getElementById('building-type-filter').value;                // Update info panel
+
+                        showBuildingInfo(building);
+
+        // Group buildings by campus              }
+
+        const campuses = {};            }
+
+                  });
+
+        for (const [id, building] of Object.entries(buildingData)) {
+
+          // Apply filters          // Change cursor when hovering over markers
+
+          if ((campusFilter === 'all' || building.campus === campusFilter) &&          map.events.add('mouseenter', 'building-markers', () => {
+
+              (typeFilter === 'all' || (typeFilter === 'special' && building.campus === 'Special'))) {            map.getCanvasContainer().style.cursor = 'pointer';
+
+                      });
+
+            if (!campuses[building.campus]) {
+
+              campuses[building.campus] = [];          map.events.add('mouseleave', 'building-markers', () => {
+
+            }            map.getCanvasContainer().style.cursor = 'grab';
+
+                      });
+
+            campuses[building.campus].push({
+
+              id,          createMarkers();
+
+              ...building          setupEventListeners();
+
+            });        });
+
+          }
+
+        }      } catch (error) {
+
+                console.warn('Azure Maps failed to load, using fallback map');
+
+        // Add buildings to the grid        initFallbackMap();
+
+        for (const campus in campuses) {      }
+
+          // Add campus header    }
+
+          const campusHeader = document.createElement('div');
+
+          campusHeader.style.gridColumn = '1 / -1';    function createMarkers() {
+
+          campusHeader.innerHTML = `<h3 style="margin-top: 15px; color: #2d3748; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">${campus} Campus</h3>`;      console.log('createMarkers() called');
+
+          buildingsGrid.appendChild(campusHeader);      console.log('buildingData:', buildingData);
+
+                
+
+          // Sort buildings by name      // Clear existing markers
+
+          campuses[campus].sort((a, b) => a.name.localeCompare(b.name));      if (datasource) {
+
+                  datasource.clear();
+
+          // Add buildings for this campus      }
+
+          for (const building of campuses[campus]) {
+
+            const buildingCard = document.createElement('div');      const campusFilter = document.getElementById('campus-filter').value;
+
+            buildingCard.className = 'building-card';      console.log('Campus filter:', campusFilter);
+
+            buildingCard.style.cssText = `      const features = [];
+
+              padding: 15px;
+
+              border-radius: 8px;      Object.entries(buildingData).forEach(([buildingId, building]) => {
+
+              background: white;        if (campusFilter !== 'all' && building.campus !== campusFilter) {
+
+              border: 1px solid #e2e8f0;          return; // Skip if not matching filter
+
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);        }
+
+              transition: transform 0.2s, box-shadow 0.2s;
+
+              cursor: pointer;        console.log(`Creating marker for ${building.name} at ${building.lat}, ${building.lng}`);
+
+            `;
+
+                    // Create a feature for each building
+
+            buildingCard.innerHTML = `        const feature = new atlas.data.Feature(new atlas.data.Point([building.lng, building.lat]), {
+
+              <h4 style="margin-top: 0; color: #2d3748;">${building.name}</h4>          name: building.name,
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Building ID: ${building.id}</p>          campus: building.campus,
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Campus: ${building.campus}</p>          buildingId: buildingId,
+
+              <p style="margin: 5px 0; color: #4a5568; font-size: 14px;">Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>          color: campusColors[building.campus] || '#FF0000',
+
+            `;          coordinates: `${building.lat.toFixed(6)}, ${building.lng.toFixed(6)}`
+
+                    });
+
+            // Add hover effect
+
+            buildingCard.addEventListener('mouseenter', function() {        features.push(feature);
+
+              this.style.transform = 'translateY(-3px)';      });
+
+              this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+
+            });      console.log(`Created ${features.length} features`);
+
+            
+
+            buildingCard.addEventListener('mouseleave', function() {      // Add all features to the data source
+
+              this.style.transform = 'translateY(0)';      if (datasource) {
+
+              this.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';        datasource.add(features);
+
+            });        console.log('Features added to datasource');
+
+                  } else {
+
+            // Add click event to center map on building        console.error('Datasource is null!');
+
+            buildingCard.addEventListener('click', function() {      }
+
+              if (map) {    }
+
+                try {
+
+                  map.setCamera({    function showBuildingInfo(building) {
+
+                    center: [building.lng, building.lat],      const infoDiv = document.getElementById('building-info');
+
+                    zoom: 18      const nameElement = document.getElementById('building-name');
+
+                  });      const detailsElement = document.getElementById('building-details');
+
+                        
+
+                  // Show popup for the building      nameElement.textContent = building.name;
+
+                  let popup = new atlas.Popup({      detailsElement.innerHTML = `
+
+                    content: `        <strong>Campus:</strong> ${building.campus} Campus<br>
+
+                      <div style="padding: 10px;">        <strong>Location:</strong> ${building.lat.toFixed(6)}, ${building.lng.toFixed(6)}<br>
+
+                        <h3 style="margin-top: 0;">${building.name}</h3>        <strong>Activities:</strong> Check the main activities page for what's available in this building.
+
+                        <p>Campus: ${building.campus}</p>      `;
+
+                        <p>Building ID: ${building.id}</p>      
+
+                        <p>Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>      infoDiv.style.display = 'block';
+
+                      </div>    }
+
+                    `,
+
+                    position: [building.lng, building.lat]    function setupEventListeners() {
+
+                  });      // Campus filter
+
+                        document.getElementById('campus-filter').addEventListener('change', createMarkers);
+
+                  popup.open(map);
+
+                } catch (error) {      // Map style toggle button
+
+                  console.error("Error centering map:", error);      let currentStyle = 'satellite_road_labels';
+
+                }      const styleButton = document.getElementById('map-style-toggle');
+
+              }      
+
+            });      styleButton.addEventListener('click', () => {
+
+                    console.log('Style toggle clicked, current style:', currentStyle);
+
+            buildingsGrid.appendChild(buildingCard);        if (map) {
+
+          }          // Add event listener for style change completion
+
+        }          const onStyleChange = () => {
+
+      }            console.log('Style changed, recreating layers and markers');
+
+                  if (window.createMapLayers) {
+
+      // Fallback function when map can't be loaded              createMapLayers();
+
+      function populateFallbackBuildingList() {            }
+
+        populateBuildingList();            createMarkers();
+
+      }            map.events.remove('styledata', onStyleChange);
+
+    });          };
+
+  </script>
+
+</body>          map.events.add('styledata', onStyleChange);
+
+</html>
+          if (currentStyle === 'satellite_road_labels') {
+            console.log('Switching to road view');
+            map.setStyle({ style: 'road' });
+            currentStyle = 'road';
+            styleButton.innerHTML = '🛰️ Switch to Satellite';
+          } else {
+            console.log('Switching to satellite view');
+            map.setStyle({ style: 'satellite_road_labels' });
+            currentStyle = 'satellite_road_labels';
+            styleButton.innerHTML = '🗺️ Switch to Road View';
+          }
+        } else {
+          console.error('Map is not initialized');
+        }
+      });
+
+      // Center map button
+      document.getElementById('center-map').addEventListener('click', () => {
+        if (map) {
+          map.setCamera({
+            center: [-122.1379, 47.6423],
+            zoom: 15
+          });
+        }
+      });
+
+    }
+
+    function initFallbackMap() {
+      // Fallback interactive map using basic HTML/CSS
+      const mapDiv = document.getElementById('map');
+      const campusFilter = document.getElementById('campus-filter');
+      
+      function renderFallbackMap() {
+        const filterValue = campusFilter.value;
+        const filteredBuildings = Object.entries(buildingData).filter(([id, building]) => 
+          filterValue === 'all' || building.campus === filterValue
+        );
+
+        mapDiv.innerHTML = `
+          <div style="padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="margin: 0 0 30px 0; font-size: 28px;">📍 Campus Buildings</h3>
+            <p style="margin-bottom: 30px; font-size: 16px; opacity: 0.9;">
+              Interactive map requires Azure Maps API key. For now, browse buildings below:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-height: 1000px; overflow-y: auto; padding: 20px;">
+              ${filteredBuildings.map(([id, building]) => `
+                <div onclick="showBuildingInfo(${JSON.stringify(building).replace(/"/g, '&quot;')})" style="
+                  background: white; 
+                  color: #2d3748; 
+                  padding: 20px; 
+                  border-radius: 12px; 
+                  cursor: pointer; 
+                  transition: transform 0.2s, box-shadow 0.2s;
+                  border-left: 5px solid ${campusColors[building.campus] || '#6B7280'};
+                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 12px rgba(0, 0, 0, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)'">
+                  <h4 style="margin: 0 0 10px 0; font-size: 18px; color: #1a202c;">${building.name}</h4>
+                  <p style="margin: 0; font-size: 14px; color: #4a5568; line-height: 1.5;">
+                    <strong style="color: ${campusColors[building.campus] || '#6B7280'};">${building.campus} Campus</strong><br>
+                    <span style="font-family: monospace; font-size: 12px;">${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</span>
+                  </p>
+                </div>
+              `).join('')}
+            </div>
+            <p style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+              Click on any building card to see more details in the information panel below.
+            </p>
+          </div>
+        `;
+      }
+
+      renderFallbackMap();
+      
+      // Update fallback map when filter changes
+      campusFilter.addEventListener('change', renderFallbackMap);
+      
+      // Update center button for fallback
+      document.getElementById('center-map').addEventListener('click', () => {
+        mapDiv.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // Initialize map when page loads
+    window.addEventListener('load', () => {
+      // Try to initialize Azure Maps
+      if (typeof atlas !== 'undefined') {
+        initMap();
+      } else {
+        // If Azure Maps doesn't load, show fallback
+        setTimeout(initFallbackMap, 1000);
+      }
+    });
+
+    // Global function for fallback map clicks
+    window.showBuildingInfo = showBuildingInfo;
+  </script>
+</body>
+</html>

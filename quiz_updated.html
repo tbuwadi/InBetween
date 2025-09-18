@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Activity Quiz - In Between</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/sidebar-styles.css">
+  <style>
+    .quiz-container { 
+      max-width: 600px; 
+      margin: 0 auto 40px auto; 
+      background: #fff; 
+      border-radius: 18px; 
+      box-shadow: 0 2px 12px rgba(37,99,235,0.08); 
+      padding: 32px 28px; 
+      text-align: center; 
+    }
+    .quiz-title { 
+      font-size: 1.5rem; 
+      font-weight: bold; 
+      color: #38b2ac; 
+      margin-bottom: 18px; 
+    }
+    .quiz-question { 
+      font-size: 1.08rem; 
+      color: #222; 
+      margin-bottom: 16px; 
+    }
+    .quiz-options { 
+      margin-bottom: 24px; 
+    }
+    .quiz-options label { 
+      display: block; 
+      margin: 8px 0; 
+      font-size: 1rem; 
+      color: #444; 
+      cursor: pointer; 
+      text-align: left;
+      padding: 10px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .quiz-options label:hover {
+      background-color: #f7fafc;
+      border-color: #cbd5e0;
+    }
+    .quiz-btn { 
+      background: #38b2ac; 
+      color: #fff; 
+      border: none; 
+      border-radius: 8px; 
+      padding: 10px 22px; 
+      font-size: 1.08rem; 
+      font-weight: 500; 
+      cursor: pointer; 
+      margin-top: 12px; 
+      transition: background-color 0.2s;
+    }
+    .quiz-btn:hover { 
+      background: #319795; 
+    }
+    .quiz-btn:active { 
+      background: #2c8c7a; 
+    }
+    .quiz-result { 
+      font-size: 1.12rem; 
+      color: #38b2ac; 
+      font-weight: 500; 
+      margin-top: 24px; 
+    }
+    .quiz-question-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .quiz-question-title span {
+      color: #38b2ac;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>
+      <h2>Navigation</h2>
+      <ul class="category-list">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="main.html">📋 Activities</a></li>
+        <li><a href="map.html">🗺️ Campus Map</a></li>
+        <li><a href="campus-map.html">🏢 Building Directory</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="navigation-links">
+        <a href="main.html" class="back-button">← Back to Activities</a>
+      </div>
+      
+      <h1>Find Your <span style="color:#38b2ac;font-weight:bold;">Activity</span></h1>
+      <p style="color: #4a5568; margin-bottom: 30px;">
+        Answer a few questions to discover activities that match your preferences.
+      </p>
+      
+      <div class="quiz-question-title" id="question-title-0">What campus would you like to explore?</div>
+      <div class="quiz-question-title" id="question-title-1" style="display:none;">Pick a vibe:</div>
+      
+      <div class="quiz-container">
+        <form id="quiz-form">
+          <div id="step-0" class="quiz-step">
+            <div class="quiz-options">
+              <label>
+                <input type="checkbox" name="area" value="East Campus">
+                East Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="West Campus">
+                West Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="North Campus">
+                North Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="RedWest Campus">
+                RedWest Campus
+              </label>
+            </div>
+            <button type="button" class="quiz-btn" onclick="nextStep()">Next →</button>
+          </div>
+          
+          <div id="step-1" class="quiz-step" style="display:none;">
+            <div class="quiz-options">
+              <label>
+                <input type="radio" name="vibe" value="energetic">
+                Energetic - I want to move around and be active
+              </label>
+              <label>
+                <input type="radio" name="vibe" value="focus">
+                Focus - I need to get work done in a different setting
+              </label>
+              <label>
+                <input type="radio" name="vibe" value="social">
+                Social - I want to interact with others
+              </label>
+              <label>
+                <input type="radio" name="vibe" value="refreshing">
+                Refreshing - I need a break to recharge
+              </label>
+              <label>
+                <input type="radio" name="vibe" value="creative">
+                Creative - I want to express myself or be inspired
+              </label>
+            </div>
+            <button type="button" class="quiz-btn" onclick="prevStep()">← Back</button>
+            <button type="button" class="quiz-btn" onclick="showResults()">Find Activities</button>
+          </div>
+          
+          <div id="quiz-results" style="display:none;">
+            <div class="quiz-title">Here are your recommended activities:</div>
+            <div id="results-list"></div>
+            <button type="button" class="quiz-btn" onclick="resetQuiz()">Start Over</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let currentStep = 0;
+    
+    function nextStep() {
+      // Validate current step
+      if (currentStep === 0) {
+        const checkboxes = document.querySelectorAll('input[name="area"]:checked');
+        if (checkboxes.length === 0) {
+          alert("Please select at least one campus to explore.");
+          return;
+        }
+      }
+      
+      // Hide current step
+      document.getElementById(`step-${currentStep}`).style.display = 'none';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'none';
+      
+      // Show next step
+      currentStep++;
+      document.getElementById(`step-${currentStep}`).style.display = 'block';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'block';
+    }
+    
+    function prevStep() {
+      // Hide current step
+      document.getElementById(`step-${currentStep}`).style.display = 'none';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'none';
+      
+      // Show previous step
+      currentStep--;
+      document.getElementById(`step-${currentStep}`).style.display = 'block';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'block';
+    }
+    
+    function showResults() {
+      // Validate vibe selection
+      const vibeRadio = document.querySelector('input[name="vibe"]:checked');
+      if (!vibeRadio) {
+        alert("Please select a vibe to continue.");
+        return;
+      }
+      
+      // Get selected values
+      const campuses = Array.from(document.querySelectorAll('input[name="area"]:checked')).map(cb => cb.value);
+      const vibe = vibeRadio.value;
+      
+      // Hide question steps
+      document.getElementById(`step-${currentStep}`).style.display = 'none';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'none';
+      
+      // Show results
+      const resultsDiv = document.getElementById('results-list');
+      resultsDiv.innerHTML = '';
+      
+      // Generate recommendations based on selections
+      const recommendations = generateRecommendations(campuses, vibe);
+      
+      if (recommendations.length > 0) {
+        recommendations.forEach(rec => {
+          const recItem = document.createElement('div');
+          recItem.style.cssText = `
+            padding: 15px;
+            margin: 10px 0;
+            background: #f7fafc;
+            border-radius: 8px;
+            text-align: left;
+            border-left: 4px solid #38b2ac;
+          `;
+          
+          recItem.innerHTML = `
+            <h3 style="margin-top: 0; color: #2d3748;">${rec.title}</h3>
+            <p style="margin: 5px 0; color: #4a5568;">${rec.description}</p>
+            <p style="margin: 5px 0; color: #718096; font-size: 14px;">Location: ${rec.location}</p>
+            <a href="${rec.link}" style="color: #38b2ac; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 8px;">Explore →</a>
+          `;
+          
+          resultsDiv.appendChild(recItem);
+        });
+      } else {
+        resultsDiv.innerHTML = `<p style="color: #4a5568;">No exact matches found for your criteria. Try different options!</p>`;
+      }
+      
+      document.getElementById('quiz-results').style.display = 'block';
+    }
+    
+    function resetQuiz() {
+      // Reset form
+      document.getElementById('quiz-form').reset();
+      
+      // Hide results
+      document.getElementById('quiz-results').style.display = 'none';
+      
+      // Show first step
+      currentStep = 0;
+      document.getElementById(`step-${currentStep}`).style.display = 'block';
+      document.getElementById(`question-title-${currentStep}`).style.display = 'block';
+    }
+    
+    function generateRecommendations(campuses, vibe) {
+      // Sample recommendations based on selections
+      const allRecs = [
+        // Energetic activities
+        {
+          vibe: 'energetic',
+          campus: 'East Campus',
+          title: 'Basketball Court',
+          description: 'Shoot some hoops and get your body moving.',
+          location: 'Building 25, East Campus',
+          link: 'activities/movement/basketball.html'
+        },
+        {
+          vibe: 'energetic',
+          campus: 'West Campus',
+          title: 'Soccer Field',
+          description: 'Join a pickup soccer game or practice your skills.',
+          location: 'Near Building 92, West Campus',
+          link: 'activities/movement/soccer.html'
+        },
+        
+        // Focus activities
+        {
+          vibe: 'focus',
+          campus: 'East Campus',
+          title: 'Library',
+          description: 'A quiet space to focus and get work done.',
+          location: 'Building 4, East Campus',
+          link: 'activities/learn/library.html'
+        },
+        {
+          vibe: 'focus',
+          campus: 'North Campus',
+          title: 'Acoustic Panel Room',
+          description: 'Sound-dampened space for focused work.',
+          location: 'Building 121N, North Campus',
+          link: 'activities/explore/acousticpanel.html'
+        },
+        
+        // Social activities
+        {
+          vibe: 'social',
+          campus: 'West Campus',
+          title: 'The Commons',
+          description: 'Meet colleagues and socialize in this central hub.',
+          location: 'The Commons, West Campus',
+          link: 'activities/funmeetingspaces/speakeasy.html'
+        },
+        {
+          vibe: 'social',
+          campus: 'RedWest Campus',
+          title: 'Speakeasy Room',
+          description: 'Hidden meeting space with a fun theme.',
+          location: 'Building RedWest B, RedWest Campus',
+          link: 'activities/funmeetingspaces/speakeasy.html'
+        },
+        
+        // Refreshing activities
+        {
+          vibe: 'refreshing',
+          campus: 'East Campus',
+          title: 'Nap Room',
+          description: 'Take a short power nap to recharge.',
+          location: 'Building 16, East Campus',
+          link: 'activities/wellness/naproom.html'
+        },
+        {
+          vibe: 'refreshing',
+          campus: 'West Campus',
+          title: 'Coffee Bar',
+          description: 'Grab a premium coffee from the Breville machine.',
+          location: 'Building 122, West Campus',
+          link: 'activities/coffee/breville.html'
+        },
+        
+        // Creative activities
+        {
+          vibe: 'creative',
+          campus: 'North Campus',
+          title: 'Music Room',
+          description: 'Play instruments or jam with colleagues.',
+          location: 'Building 123N, North Campus',
+          link: 'activities/music/musicroom.html'
+        },
+        {
+          vibe: 'creative',
+          campus: 'West Campus',
+          title: 'Karaoke Room',
+          description: 'Sing your heart out in the private karaoke room.',
+          location: 'Building 121, West Campus',
+          link: 'activities/music/karaoke.html'
+        }
+      ];
+      
+      // Filter recommendations based on user selections
+      return allRecs.filter(rec => {
+        return campuses.includes(rec.campus) && rec.vibe === vibe;
+      });
+    }
+  </script>
+</body>
+</html>

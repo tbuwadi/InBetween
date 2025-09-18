@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Map - In Between</title>
+    
+    <!-- Azure Maps SDK -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+    
+    <!-- Building Data -->
+    <script src="js/buildingData.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/sidebar-styles.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .controls button {
+            padding: 8px 16px;
+            background-color: #38b2ac;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .controls button:hover {
+            background-color: #319795;
+        }
+        
+        .controls button.active {
+            background-color: #2c8c7a;
+        }
+        
+        .building-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .building-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            transition: transform 0.2s;
+        }
+        
+        .building-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .building-card h3 {
+            margin-top: 0;
+            color: #38b2ac;
+        }
+        
+        .building-info {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        #fallback-map {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            #map {
+                height: 400px;
+            }
+            
+            .building-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>
+            <h2>Navigation</h2>
+            <ul class="category-list">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="main.html">📋 Activities</a></li>
+                <li><a href="map.html">🗺️ Campus Map</a></li>
+                <li class="active">🏢 Building Directory</li>
+            </ul>
+            <h2>Campus Filter</h2>
+            <ul class="category-list">
+                <li id="all-campus-nav" class="active" onclick="filterBuildings('all')">📍 All Campuses</li>
+                <li id="east-campus-nav" onclick="filterBuildings('East')">📍 East Campus</li>
+                <li id="west-campus-nav" onclick="filterBuildings('West')">📍 West Campus</li>
+                <li id="north-campus-nav" onclick="filterBuildings('North')">📍 North Campus</li>
+                <li id="redwest-campus-nav" onclick="filterBuildings('RedWest')">📍 RedWest Campus</li>
+                <li id="special-campus-nav" onclick="filterBuildings('Special')">📍 Special Facilities</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="navigation-links">
+                <a href="main.html" class="back-button">← Back to Activities</a>
+                <a href="map.html" class="back-button">View Campus Map</a>
+            </div>
+            
+            <h1>Campus <span style="color:#38b2ac;font-weight:bold;">Building Directory</span></h1>
+            <p style="color: #4a5568; margin-bottom: 20px;">
+                Explore all Microsoft campus buildings and find your way around. Filter by campus or click on a building for more details.
+            </p>
+        <div class="controls">
+            <button id="all-campus" class="active" onclick="filterBuildings('all')">All Campuses</button>
+            <button id="east-campus" onclick="filterBuildings('East')">East Campus</button>
+            <button id="west-campus" onclick="filterBuildings('West')">West Campus</button>
+            <button id="north-campus" onclick="filterBuildings('North')">North Campus</button>
+            <button id="redwest-campus" onclick="filterBuildings('RedWest')">RedWest Campus</button>
+            <button id="special-campus" onclick="filterBuildings('Special')">Special Facilities</button>
+        </div>
+        
+        <div id="map"></div>
+        
+        <!-- Fallback map in case Azure Maps fails -->
+        <div id="fallback-map">
+            <h2>Building Directory</h2>
+            <p>Azure Maps could not be loaded. Here's a list of buildings by campus:</p>
+            <div id="fallback-buildings" class="building-list">
+                <!-- Buildings will be populated here -->
+            </div>
+        </div>
+        
+        <div id="building-list" class="building-list">
+            <!-- Buildings will be populated here -->
+        </div>
+        
+        <a href="map.html" class="back-link">← Back to Campus Map</a>
+        <a href="index.html" class="back-link" style="margin-left: 20px;">← Back to Homepage</a>
+    </main>
+    
+    <script>
+        // Set this to your actual Azure Maps subscription key
+        const azureMapsKey = '';
+        
+        // Track all markers for filtering
+        let markers = [];
+        let map = null;
+        let currentFilter = 'all';
+        
+        // Initialize the map
+        function initMap() {
+            try {
+                console.log("Initializing Azure Maps...");
+                
+                // Create the map instance
+                map = new atlas.Map('map', {
+                    center: [-122.1379, 47.6423], // Microsoft campus center
+                    zoom: 15,
+                    view: 'Auto',
+                    authOptions: {
+                        authType: 'subscriptionKey',
+                        subscriptionKey: azureMapsKey
+                    },
+                    enableAccessibility: true
+                });
+                
+                // Wait until the map resources are ready
+                map.events.add('ready', function() {
+                    console.log("Map is ready");
+                    
+                    // Create a data source for the building markers
+                    let dataSource = new atlas.source.DataSource();
+                    map.sources.add(dataSource);
+                    
+                    // Create a symbol layer for rendering the points
+                    let symbolLayer = new atlas.layer.SymbolLayer(dataSource, null, {
+                        iconOptions: {
+                            image: 'pin-round-blue',
+                            anchor: 'center',
+                            allowOverlap: true
+                        },
+                        textOptions: {
+                            anchor: "top"
+                        }
+                    });
+                    map.layers.add(symbolLayer);
+                    
+                    // Create a popup for the markers
+                    let popup = new atlas.Popup();
+                    
+                    // Add buildings to the map
+                    addBuildingsToMap(dataSource, popup);
+                    
+                    // Handle click events on symbols for popups
+                    map.events.add('click', symbolLayer, (e) => {
+                        let properties = e.shapes[0].getProperties();
+                        let content = `<div style="padding:10px"><b>${properties.name}</b><br>Campus: ${properties.campus}</div>`;
+                        
+                        popup.setOptions({
+                            content: content,
+                            position: e.shapes[0].getCoordinates()
+                        });
+                        
+                        popup.open(map);
+                    });
+                    
+                    // Also populate the building list beneath the map
+                    populateBuildingList();
+                });
+            } catch (error) {
+                console.error("Error initializing Azure Maps:", error);
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('fallback-map').style.display = 'block';
+                
+                // Populate the fallback building display
+                populateFallbackMap();
+            }
+        }
+        
+        // Add building markers to the map
+        function addBuildingsToMap(dataSource, popup) {
+            console.log("Adding buildings to map...");
+            markers = [];
+            
+            // Clear existing points
+            dataSource.clear();
+            
+            // Add building points to the data source
+            for (const [id, building] of Object.entries(buildingData)) {
+                if (currentFilter === 'all' || building.campus === currentFilter) {
+                    const point = new atlas.data.Feature(
+                        new atlas.data.Point([building.lng, building.lat]),
+                        {
+                            id: id,
+                            name: building.name,
+                            campus: building.campus
+                        }
+                    );
+                    
+                    markers.push(point);
+                    dataSource.add(point);
+                }
+            }
+            
+            console.log(`Added ${markers.length} buildings to map`);
+        }
+        
+        // Filter buildings by campus
+        function filterBuildings(campus) {
+            console.log(`Filtering buildings for campus: ${campus}`);
+            currentFilter = campus;
+            
+            // Update active button
+            document.querySelectorAll('.controls button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            let buttonId;
+            switch(campus) {
+                case 'East': buttonId = 'east-campus'; break;
+                case 'West': buttonId = 'west-campus'; break;
+                case 'North': buttonId = 'north-campus'; break;
+                case 'RedWest': buttonId = 'redwest-campus'; break;
+                case 'Special': buttonId = 'special-campus'; break;
+                default: buttonId = 'all-campus';
+            }
+            
+            document.getElementById(buttonId).classList.add('active');
+            
+            if (map) {
+                // Get the data source and update it
+                let dataSource = map.sources.getById('default');
+                if (dataSource) {
+                    addBuildingsToMap(dataSource);
+                }
+            }
+            
+            // Update building list
+            populateBuildingList();
+            
+            // Update fallback map if shown
+            if (document.getElementById('fallback-map').style.display === 'block') {
+                populateFallbackMap();
+            }
+        }
+        
+        // Populate the building list beneath the map
+        function populateBuildingList() {
+            const buildingListElement = document.getElementById('building-list');
+            buildingListElement.innerHTML = '';
+            
+            // Group buildings by campus for better organization
+            const groupedBuildings = {};
+            
+            for (const [id, building] of Object.entries(buildingData)) {
+                if (currentFilter === 'all' || building.campus === currentFilter) {
+                    if (!groupedBuildings[building.campus]) {
+                        groupedBuildings[building.campus] = [];
+                    }
+                    
+                    groupedBuildings[building.campus].push({
+                        id: id,
+                        ...building
+                    });
+                }
+            }
+            
+            // Sort campuses alphabetically
+            const sortedCampuses = Object.keys(groupedBuildings).sort();
+            
+            for (const campus of sortedCampuses) {
+                // Add campus header
+                const campusHeader = document.createElement('div');
+                campusHeader.className = 'campus-header';
+                campusHeader.style.gridColumn = '1 / -1';
+                campusHeader.innerHTML = `<h2>${campus} Campus</h2>`;
+                buildingListElement.appendChild(campusHeader);
+                
+                // Sort buildings by name
+                const sortedBuildings = groupedBuildings[campus].sort((a, b) => {
+                    return a.name.localeCompare(b.name);
+                });
+                
+                // Add buildings
+                for (const building of sortedBuildings) {
+                    const buildingCard = document.createElement('div');
+                    buildingCard.className = 'building-card';
+                    buildingCard.innerHTML = `
+                        <h3>${building.name}</h3>
+                        <div class="building-info">
+                            <p>ID: ${building.id}</p>
+                            <p>Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>
+                        </div>
+                    `;
+                    
+                    // Add click event to center the map on this building
+                    buildingCard.addEventListener('click', function() {
+                        if (map) {
+                            map.setCamera({
+                                center: [building.lng, building.lat],
+                                zoom: 18
+                            });
+                        }
+                    });
+                    
+                    buildingListElement.appendChild(buildingCard);
+                }
+            }
+        }
+        
+        // Populate the fallback map when Azure Maps fails
+        function populateFallbackMap() {
+            const fallbackElement = document.getElementById('fallback-buildings');
+            fallbackElement.innerHTML = '';
+            
+            // Group buildings by campus for better organization
+            const groupedBuildings = {};
+            
+            for (const [id, building] of Object.entries(buildingData)) {
+                if (currentFilter === 'all' || building.campus === currentFilter) {
+                    if (!groupedBuildings[building.campus]) {
+                        groupedBuildings[building.campus] = [];
+                    }
+                    
+                    groupedBuildings[building.campus].push({
+                        id: id,
+                        ...building
+                    });
+                }
+            }
+            
+            // Sort campuses alphabetically
+            const sortedCampuses = Object.keys(groupedBuildings).sort();
+            
+            for (const campus of sortedCampuses) {
+                // Add campus header
+                const campusHeader = document.createElement('div');
+                campusHeader.className = 'campus-header';
+                campusHeader.style.gridColumn = '1 / -1';
+                campusHeader.innerHTML = `<h2>${campus} Campus</h2>`;
+                fallbackElement.appendChild(campusHeader);
+                
+                // Sort buildings by name
+                const sortedBuildings = groupedBuildings[campus].sort((a, b) => {
+                    return a.name.localeCompare(b.name);
+                });
+                
+                // Add buildings
+                for (const building of sortedBuildings) {
+                    const buildingCard = document.createElement('div');
+                    buildingCard.className = 'building-card';
+                    buildingCard.innerHTML = `
+                        <h3>${building.name}</h3>
+                        <div class="building-info">
+                            <p>ID: ${building.id}</p>
+                            <p>Coordinates: ${building.lat.toFixed(4)}, ${building.lng.toFixed(4)}</p>
+                        </div>
+                    `;
+                    
+                    fallbackElement.appendChild(buildingCard);
+                }
+            }
+        }
+        
+        // Handle Azure Maps loading errors
+        function handleMapError() {
+            console.error("Azure Maps failed to load");
+            document.getElementById('map').style.display = 'none';
+            document.getElementById('fallback-map').style.display = 'block';
+            populateFallbackMap();
+        }
+        
+        // Initialize the map when the page loads
+        window.onload = function() {
+            // Set timeout to handle case where Azure Maps doesn't load
+            const mapLoadTimeout = setTimeout(handleMapError, 5000);
+            
+            try {
+                // Initialize the map
+                initMap();
+                
+                // Clear the timeout if map initialization succeeded
+                clearTimeout(mapLoadTimeout);
+            } catch (error) {
+                console.error("Error initializing map:", error);
+                handleMapError();
+            }
+        };
+    </script>
+</body>
+</html>

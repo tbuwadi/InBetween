@@ -5,12 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>In Between</title>
   <link rel="stylesheet" href="styles/style.css">
+  <style>
+    .landing-body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      text-align: center;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .headline {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2d3748;
+      line-height: 1.3;
+    }
+    
+    .subtext {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    
+    .launch-btn {
+      display: inline-block;
+      background: #38b2ac;
+      color: white;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+    
+    .launch-btn:hover {
+      background: #319795;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(56, 178, 172, 0.2);
+    }
+    
+    .navigation-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 10px 15px;
+      color: #4a5568;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .nav-link:hover {
+      background: rgba(56, 178, 172, 0.1);
+      color: #38b2ac;
+    }
+  </style>
 </head>
 <body class="landing-body">
   <div class="container">
-  <h1 class="headline">The best part of your day might be <span style="color:#38b2ac;font-weight:bold;">In&nbsp;Between</span>.</h1>
-  <p class="subtext">Explore hidden rooms, try new coffee machines, jam in music spaces, or take a walk to fun meeting space.<br>The Redmond Campus is full of surprises—discover them.</p>
-  <a href="main.html" class="launch-btn" style="font-weight:bold; text-decoration:none;">🚀 Launch In&nbsp;Between →</a>
+    <h1 class="headline">The best part of your day might be <span style="color:#38b2ac;font-weight:bold;">In&nbsp;Between</span>.</h1>
+    <p class="subtext">Explore hidden rooms, try new coffee machines, jam in music spaces, or take a walk to fun meeting space.<br>The Redmond Campus is full of surprises—discover them.</p>
+    <a href="main.html" class="launch-btn" style="font-weight:bold; text-decoration:none;">🚀 Launch In&nbsp;Between →</a>
+    
+    <div class="navigation-links">
+      <a href="main.html" class="nav-link">📋 Activities</a>
+      <a href="map.html" class="nav-link">🗺️ Campus Map</a>
+      <a href="campus-map.html" class="nav-link">🏢 Building Directory</a>
+      <a href="quiz.html" class="nav-link">📝 Activity Quiz</a>
+    </div>
   </div>
 </body>
 </html>

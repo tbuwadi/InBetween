@@ -3,73 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find Your Activity Quiz</title>
+  <title>Find Your Activity Quiz - In Between</title>
   <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/sidebar-styles.css">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; margin: 0; }
-    .quiz-container { max-width: 400px; margin: 48px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(37,99,235,0.08); padding: 32px 28px; text-align: center; }
-    .quiz-title { font-size: 1.5rem; font-weight: bold; color: #38b2ac; margin-bottom: 18px; }
-    .quiz-question { font-size: 1.08rem; color: #222; margin-bottom: 16px; }
-    .quiz-options { margin-bottom: 24px; }
-    .quiz-options label { display: block; margin: 8px 0; font-size: 1rem; color: #444; cursor: pointer; }
-    .quiz-btn { background: #38b2ac; color: #fff; border: none; border-radius: 14px; padding: 10px 22px; font-size: 1.08rem; font-weight: 500; cursor: pointer; margin-top: 12px; }
-    .quiz-btn:active { background: #2c8c7a; }
-    .quiz-result { font-size: 1.12rem; color: #38b2ac; font-weight: 500; margin-top: 24px; }
+    .quiz-container { 
+      max-width: 600px; 
+      margin: 0 auto 40px auto; 
+      background: #fff; 
+      border-radius: 18px; 
+      box-shadow: 0 2px 12px rgba(37,99,235,0.08); 
+      padding: 32px 28px; 
+      text-align: center; 
+    }
+    .quiz-title { 
+      font-size: 1.5rem; 
+      font-weight: bold; 
+      color: #38b2ac; 
+      margin-bottom: 18px; 
+    }
+    .quiz-question { 
+      font-size: 1.08rem; 
+      color: #222; 
+      margin-bottom: 16px; 
+    }
+    .quiz-options { 
+      margin-bottom: 24px; 
+    }
+    .quiz-options label { 
+      display: block; 
+      margin: 8px 0; 
+      font-size: 1rem; 
+      color: #444; 
+      cursor: pointer; 
+      text-align: left;
+      padding: 10px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .quiz-options label:hover {
+      background-color: #f7fafc;
+      border-color: #cbd5e0;
+    }
+    .quiz-btn { 
+      background: #38b2ac; 
+      color: #fff; 
+      border: none; 
+      border-radius: 8px; 
+      padding: 10px 22px; 
+      font-size: 1.08rem; 
+      font-weight: 500; 
+      cursor: pointer; 
+      margin-top: 12px; 
+      transition: background-color 0.2s;
+    }
+    .quiz-btn:hover { 
+      background: #319795; 
+    }
+    .quiz-btn:active { 
+      background: #2c8c7a; 
+    }
+    .quiz-result { 
+      font-size: 1.12rem; 
+      color: #38b2ac; 
+      font-weight: 500; 
+      margin-top: 24px; 
+    }
     .quiz-question-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      color: #38b2ac;
-      margin-bottom: 18px;
-      margin-top: 40px;
+      color: #2d3748;
+      margin-bottom: 25px;
       text-align: center;
+    }
+    .quiz-question-title span {
+      color: #38b2ac;
+      font-weight: bold;
+    }
+    .back-btn {
+      background:#e0e7ef;
+      color:#111;
+      margin-right:8px;
     }
   </style>
 </head>
 <body>
-  <div class="quiz-question-title" id="question-title-0">What campus would you like to explore?</div>
-  <div class="quiz-question-title" id="question-title-1" style="display:none;">Pick a vibe:</div>
-  <div class="quiz-container">
-    <form id="quiz-form">
-      <div id="step-0" class="quiz-step">
-        <div class="quiz-options">
-          <label>
-            <input type="checkbox" name="area" value="East Campus">
-            East Campus
-          </label>
-          <label>
-            <input type="checkbox" name="area" value="West Campus">
-            West Campus
-          </label>
-          <label>
-            <input type="checkbox" name="area" value="North Campus">
-            North Campus
-          </label>
-          <label>
-            <input type="checkbox" name="area" value="RedWest Campus">
-            RedWest Campus
-          </label>
-          <div style="height:16px;"></div>
-          <label>
-            <input type="checkbox" name="area" value="Any Campus">
-            Any Campus
-          </label>
-        </div>
-        <button type="button" class="quiz-btn" id="next-0">Next →</button>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <a href="quiz.html" class="sidebar-quiz-btn">Take the activity quiz 📝</a>
+      <h2>Navigation</h2>
+      <ul class="category-list">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="main.html">📋 Activities</a></li>
+        <li><a href="map.html">🗺️ Campus Map</a></li>
+        <li><a href="campus-map.html">🏢 Building Directory</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="navigation-links">
+        <a href="main.html" class="back-button">← Back to Activities</a>
       </div>
-      <div id="step-1" class="quiz-step" style="display:none;">
-        <div class="quiz-options">
-          <label><input type="radio" name="vibe" value="chill"> Chill</label>
-          <label><input type="radio" name="vibe" value="active"> Active</label>
-          <label><input type="radio" name="vibe" value="social"> Social</label>
-          <div style="height:16px;"></div>
-          <label><input type="radio" name="vibe" value="surprise"> Surprise me!</label>
-        </div>
-  <button type="button" class="quiz-btn" id="back-1" style="background:#e0e7ef;color:#111;margin-right:8px;">← Back</button>
-        <button type="submit" class="quiz-btn">Show me an activity!</button>
+      
+      <h1>Find Your <span style="color:#38b2ac;font-weight:bold;">Activity</span></h1>
+      <p style="color: #4a5568; margin-bottom: 30px;">
+        Answer a few questions to discover activities that match your preferences.
+      </p>
+      
+      <div class="quiz-question-title" id="question-title-0">What campus would you like to explore?</div>
+      <div class="quiz-question-title" id="question-title-1" style="display:none;">Pick a vibe:</div>
+      
+      <div class="quiz-container">
+        <form id="quiz-form">
+          <div id="step-0" class="quiz-step">
+            <div class="quiz-options">
+              <label>
+                <input type="checkbox" name="area" value="East Campus">
+                East Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="West Campus">
+                West Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="North Campus">
+                North Campus
+              </label>
+              <label>
+                <input type="checkbox" name="area" value="RedWest Campus">
+                RedWest Campus
+              </label>
+              <div style="height:16px;"></div>
+              <label>
+                <input type="checkbox" name="area" value="Any Campus">
+                Any Campus
+              </label>
+            </div>
+            <button type="button" class="quiz-btn" id="next-0">Next →</button>
+          </div>
+          
+          <div id="step-1" class="quiz-step" style="display:none;">
+            <div class="quiz-options">
+              <label><input type="radio" name="vibe" value="chill"> Chill</label>
+              <label><input type="radio" name="vibe" value="active"> Active</label>
+              <label><input type="radio" name="vibe" value="social"> Social</label>
+              <div style="height:16px;"></div>
+              <label><input type="radio" name="vibe" value="surprise"> Surprise me!</label>
+            </div>
+            <button type="button" class="quiz-btn back-btn" id="back-1">← Back</button>
+            <button type="submit" class="quiz-btn">Show me an activity!</button>
+          </div>
+        </form>
+        <div id="quiz-result" class="quiz-result" style="display:none;"></div>
       </div>
-    </form>
-    <div id="quiz-result" class="quiz-result" style="display:none;"></div>
-  </div>
+    </main>
   <script>
     // Disable other campus checkboxes if 'Any Campus' is selected
     function updateCampusCheckboxes() {
@@ -87,17 +175,18 @@
     // Initial state
     updateCampusCheckboxes();
     const activities = [
-  { name: 'Karaoke Lounge', category: 'music', building: '5', vibe: 'social', link: 'activities/music/karaoke.html' },
-  { name: 'XBox Lounge', category: 'games', building: '4', vibe: 'active', link: 'activities/games/xbox.html' },
-  { name: 'Treehouse', category: 'funmeetingspaces', building: '31', vibe: 'chill', link: 'activities/funmeetingspaces/treehouse.html' },
-  { name: 'Snack Market', category: 'coffee', building: '4', vibe: 'chill', link: 'activities/coffee/snack.html' },
-  { name: 'Breville Coffee Machine', category: 'coffee', building: '5', vibe: 'chill', link: 'activities/coffee/breville.html' },
-  { name: 'Nap Room', category: 'wellness', building: '16', vibe: 'chill', link: 'activities/wellness/naproom.html' },
-  { name: 'Basketball Court', category: 'movement', building: '92', vibe: 'active', link: 'activities/movement/basketball.html' },
-  { name: 'Library', category: 'learn', building: '7', vibe: 'chill', link: 'activities/learn/library.html' },
-  { name: 'Speakeasy / Secret Room', category: 'funmeetingspaces', building: '40', vibe: 'social', link: 'activities/funmeetingspaces/speakeasy.html' },
-  { name: 'Acoustic Panel Wall', category: 'explore', building: '40', vibe: 'surprise', link: 'activities/explore/acousticpanel.html' }
+      { name: 'Karaoke Lounge', category: 'music', building: '5', vibe: 'social', link: 'activities/music/karaoke.html' },
+      { name: 'XBox Lounge', category: 'games', building: '4', vibe: 'active', link: 'activities/games/xbox.html' },
+      { name: 'Treehouse', category: 'funmeetingspaces', building: '31', vibe: 'chill', link: 'activities/funmeetingspaces/treehouse.html' },
+      { name: 'Snack Market', category: 'coffee', building: '4', vibe: 'chill', link: 'activities/coffee/snack.html' },
+      { name: 'Breville Coffee Machine', category: 'coffee', building: '5', vibe: 'chill', link: 'activities/coffee/breville.html' },
+      { name: 'Nap Room', category: 'wellness', building: '16', vibe: 'chill', link: 'activities/wellness/naproom.html' },
+      { name: 'Basketball Court', category: 'movement', building: '92', vibe: 'active', link: 'activities/movement/basketball.html' },
+      { name: 'Library', category: 'learn', building: '7', vibe: 'chill', link: 'activities/learn/library.html' },
+      { name: 'Speakeasy / Secret Room', category: 'funmeetingspaces', building: '40', vibe: 'social', link: 'activities/funmeetingspaces/speakeasy.html' },
+      { name: 'Acoustic Panel Wall', category: 'explore', building: '40', vibe: 'surprise', link: 'activities/explore/acousticpanel.html' }
     ];
+    
     // Multi-step quiz navigation
     let currentStep = 0;
     function showStep(step) {
@@ -115,6 +204,7 @@
       const areas = Array.from(document.querySelectorAll('input[name="area"]:checked')).map(cb => cb.value);
       const vibe = document.querySelector('input[name="vibe"]:checked')?.value;
       let filtered = activities;
+      
       if (areas.length && areas.includes('Any Campus')) {
         // Legacy logic: include all activities if Any Campus is selected
         filtered = activities;
@@ -127,10 +217,12 @@
           return false;
         });
       }
+      
       if (vibe) filtered = filtered.filter(a => a.vibe === vibe || vibe === 'surprise');
+      
       if (filtered.length) {
         const pick = filtered[Math.floor(Math.random() * filtered.length)];
-  window.location.href = `${pick.link}`;
+        window.location.href = `${pick.link}`;
       } else {
         const resultDiv = document.getElementById('quiz-result');
         resultDiv.innerHTML = 'No matching activity found. Try different options!';
