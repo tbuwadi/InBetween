@@ -48,22 +48,6 @@
   min-width: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
-.tag-east {
-  background: #8b5cf6 !important;
-  color: #fff !important;
-}
-.tag-west {
-  background: #2563eb !important;
-  color: #fff !important;
-}
-.tag-north {
-  background: #e53e3e !important;
-  color: #fff !important;
-}
-.tag-redwest {
-  background: #d97706 !important;
-  color: #fff !important;
-}
 .activity-link {
   color: #38b2ac;
   font-weight: 600;
